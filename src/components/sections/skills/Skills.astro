@@ -1,0 +1,52 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import Card from '@/components/ui/card/Card.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import Mascot from '@/components/media/mascot/Mascot.astro';
+import { skills, skillCategoryOrder } from '@/data/skills/skills';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section id="skills" kicker={t.skills.kicker} title={t.skills.title} class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_h2]:text-fluid-xl">
+  <Mascot
+    slot="mascot"
+    pose="code"
+    decorative
+    widths={[160, 240]}
+    sizes="(min-width: 768px) 8rem, 4rem"
+    class="drop-shadow-sm"
+  />
+  <div class="grid gap-6 sm:grid-cols-2">
+    {
+      skillCategoryOrder.map((category, index) => (
+        <Card class="p-6" data-reveal={true} style={`--reveal-delay: ${index * 80}ms`}>
+          <h3 class="text-fluid-base mb-4 font-semibold">{t.skills.categories[category]}</h3>
+          <ul class="flex flex-wrap gap-2.5">
+            {skills[category].map((skill) => (
+              <li>
+                <span class="text-muted border-border bg-bg text-fluid-sm hover:border-accent/50 hover:text-text inline-flex items-center gap-2 rounded-md border px-3 py-2 font-medium transition-colors">
+                  <Icon
+                    name={skill.icon}
+                    size={16}
+                    title={skill.name}
+                    class={skill.color === '#181717' ? 'dark:!text-[#e6edf3]' : undefined}
+                    style={skill.color ? `color: ${skill.color}` : undefined}
+                  />
+                  {skill.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      ))
+    }
+  </div>
+</Section>

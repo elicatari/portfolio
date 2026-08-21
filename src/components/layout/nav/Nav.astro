@@ -1,0 +1,75 @@
+---
+import { navItems } from '@/data/navigation/navigation';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+import { cn } from '@/lib/utils/cn/cn';
+
+interface Props {
+  lang: Lang;
+  /** Prefijo para las anclas cuando NO estamos en la home (ej. "/" o "/en"). */
+  anchorBase?: string;
+  class?: string;
+  /** clase para cada enlace (permite variar entre desktop y mobile). */
+  linkClass?: string;
+}
+
+const { lang, anchorBase = '', class: className, linkClass } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<ul class={cn('flex items-center gap-1', className)}>
+  {
+    navItems.map((item) => (
+      <li>
+        <a
+          href={`${anchorBase}${item.anchor}`}
+          data-nav-link
+          data-anchor={item.anchor}
+          class={cn(
+            'text-sm text-muted hover:text-link aria-[current=true]:text-link relative rounded-md px-2.5 py-1.5 font-medium transition-colors',
+            linkClass,
+          )}
+        >
+          {t.nav[item.key]}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  function initScrollSpy() {
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'));
+    if (links.length === 0) return;
+
+    const sections = links
+      .map((link) => {
+        const id = link.dataset.anchor?.replace('#', '');
+        return id ? document.getElementById(id) : null;
+      })
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        const match = link.dataset.anchor === `#${id}`;
+        link.setAttribute('aria-current', match ? 'true' : 'false');
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  initScrollSpy();
+  document.addEventListener('astro:page-load', initScrollSpy);
+</script>

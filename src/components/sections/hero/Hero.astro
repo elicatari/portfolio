@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import Container from '@/components/layout/container/Container.astro';
+import Button from '@/components/ui/button/Button.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import Scene from '@/components/media/scene/Scene.astro';
+import { site } from '@/data/site/site';
+import { socials } from '@/data/socials/socials';
+import { profilePortrait } from '@/data/profile/profile';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const cvHref = site.cv[lang];
+const cvFileName = cvHref.slice(cvHref.lastIndexOf('/') + 1);
+const contactHref = '#contacto';
+---
+
+<section id="inicio" class="relative pb-5 md:pb-10 lg:pb-12">
+  <Container>
+    <div
+      class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-2 md:grid-cols-1 md:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10"
+    >
+      <div class="min-w-0" data-reveal>
+        <p class="text-accent md:text-fluid-sm mb-0.5 text-sm font-medium md:mb-1.5">
+          {t.hero.greeting}
+        </p>
+
+        <div class="flex items-end gap-2 md:gap-3">
+          <h1 class="md:text-fluid-xl text-[1.5rem] leading-tight font-bold tracking-tight">
+            {site.name}
+          </h1>
+          <Image
+            src={profilePortrait}
+            alt={t.profile.portraitAlt}
+            widths={[80, 96, 128]}
+            sizes="3rem"
+            class="border-border h-9 w-9 shrink-0 rounded-full border object-cover object-top shadow-sm md:h-12 md:w-12"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        <p class="text-muted md:text-fluid-base mt-0.5 text-sm leading-snug md:mt-1">
+          {t.hero.roles}
+        </p>
+      </div>
+
+      <div
+        class="w-16 shrink-0 self-center md:mx-auto md:w-full md:max-w-[22rem] lg:col-start-2 lg:row-span-2 lg:mx-0 lg:ml-auto lg:max-w-[26rem] lg:self-center"
+        data-reveal
+        style="--reveal-delay: 120ms"
+      >
+        <Scene lang={lang} alt={t.hero.sceneAlt} />
+      </div>
+
+      <div
+        class="col-span-2 min-w-0 md:col-span-1 lg:col-span-1 lg:col-start-1"
+        data-reveal
+        style="--reveal-delay: 60ms"
+      >
+        <div
+          class="text-text md:text-fluid-sm mt-2 max-w-xl space-y-1.5 text-sm leading-snug md:mt-4 md:space-y-3 md:leading-relaxed"
+        >
+          {t.hero.summary.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <div class="mt-3 flex flex-wrap items-center gap-2 md:mt-6 md:gap-3">
+          <Button href={cvHref} variant="primary" size="xs" download={cvFileName}>
+            <Icon name="lucide:download" size={14} />
+            {t.hero.ctaCv}
+          </Button>
+          <Button href={contactHref} variant="outline" size="xs">
+            {t.hero.ctaContact}
+          </Button>
+
+          <div class="flex items-center gap-1 md:ms-1">
+            {
+              socials.map((social) => (
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  class="text-muted hover:text-accent hover:border-accent border-border grid h-8 w-8 place-items-center rounded-md border transition-colors md:h-9 md:w-9"
+                >
+                  <Icon name={social.icon} size={16} />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

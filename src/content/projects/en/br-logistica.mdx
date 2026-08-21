@@ -1,0 +1,40 @@
+---
+title: 'BR Logistica'
+summary: 'WMS in production: lot-level inventory, FEFO allocation and DRAFT → CONFIRMED documents. SPA on Cloudflare, API on Railway.'
+cover: '../../../assets/projects/br/br03.png'
+gallery:
+  - '../../../assets/projects/br/br01.png'
+  - '../../../assets/projects/br/br02.png'
+  - '../../../assets/projects/br/br03.png'
+  - '../../../assets/projects/br/br04.png'
+tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'Docker', 'TanStack Query']
+role: 'Fullstack Developer'
+frontendRepoUrl: 'https://github.com/elicatari/warehouse-wms-web'
+backendRepoUrl: 'https://github.com/elicatari/warehouse-wms-core-api'
+featured: true
+order: 2
+publishedAt: 2024-05-03
+lang: 'en'
+---
+
+## Context
+
+**BR Logística** is a WMS in production for a warehouse (institutional goods). Inventory is not edited by hand: stock moves through documents, by lot and expiry, so the first product out is the one that expires first.
+
+## Frontend
+
+A **React + TypeScript** SPA on Cloudflare with **TanStack Query**. An internal operations panel, not an e-commerce site:
+
+- **Inventory:** read-only stock. Global view and **by lot**, with SKU, expiry and quantity in cases + units.
+- **Picking:** inventory exits as `DRAFT → CONFIRMED` documents (they can also be voided).
+- **Receiving, returns and adjustments:** the rest of the movements use the same document model.
+- Product, supplier and customer masters, plus reports and sales by SKU.
+- Role-restricted access.
+
+## Backend
+
+**Java + Spring Boot** API on Railway with **PostgreSQL**. The hard rule is **FEFO**: confirming a pick allocates lots by expiry date. Stock only changes through confirmed documents, not via a direct CRUD on on-hand quantities.
+
+## Outcome
+
+The warehouse sees real lot-level stock and ships with traceable documents. FEFO and the DRAFT → CONFIRMED flow keep inventory and picking in sync.

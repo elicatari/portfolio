@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello World!, I'm",
+    "roles": "Fullstack Developer Focused on Frontend / Graphic Designer",
+    "summary": [
+      "I'm a developer who builds interactive web experiences with TypeScript and React, along with robust APIs developed with Java and Spring Boot. I have hands-on experience merging software development with my graphic design training, which lets me integrate composition, visual identity and user experience into the creation process, aiming for a balance between aesthetics, usability and technical quality. My profile is complemented by data persistence with Hibernate and JPA, databases such as PostgreSQL and MongoDB, plus essential tools like Docker and GitHub.",
+      "I hold two professional degrees: Higher University Technician (TSU) in Computer Science and Graphic Designer. I keep training myself and acquiring new knowledge on my own."
+    ],
+    "ctaCv": "Download CV",
+    "ctaContact": "Let's talk",
+    "sceneAlt": "elicatari illustration: astronaut panda coding in space"
+  },
+  "about": {
+    "title": "About me",
+    "kicker": "Who I am",
+    "loveTitle": "What I love",
+    "bioTitle": "Bio",
+    "path": "My path didn't start among lines of code, but exploring visual communication as a graphic designer. Over time, curiosity about how everything worked on the inside led me into computing and software development. Today I don't see design and code as separate fields, but as two sides of the same solution.",
+    "mascot": "And that mascot? If you're wondering about the little panda that lives in this portfolio, his name is Pandiux. He was born from a play on words between pandas, user experience (UI/UX), and the free software GNU/Linux. He's the official mascot of my digital space.",
+    "elibits": "One more curiosity... Did you find the EliBits easter egg? It's the identity I use for independent technical consulting, specialized support, and software development."
+  },
+  "timeline": {
+    "title": "Roadmap",
+    "kicker": "Journey",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "skills": {
+    "title": "Skills",
+    "kicker": "Tools I use",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Databases",
+      "tools": "Tools",
+      "design": "Design"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "kicker": "Selected work",
+    "featured": "Featured",
+    "inProduction": "In production · Cloudflare + Railway",
+    "viewProject": "View project",
+    "back": "Back to projects",
+    "role": "Role",
+    "tech": "Technologies",
+    "liveDemo": "Live demo",
+    "codeSampleFrontend": "Frontend sample",
+    "codeSampleBackend": "Backend sample",
+    "gallery": "Gallery",
+    "openGallery": "Enlarge image",
+    "closeGallery": "Close image",
+    "prevGallery": "Previous image",
+    "nextGallery": "Next image"
+  },
+  "contact": {
+    "title": "Contact",
+    "kicker": "Let's talk",
+    "subtitle": "Tell me about your project or idea and I'll get back to you shortly.",
+    "emailLink": "Open your preferred email app",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "message": "Message",
+    "messagePlaceholder": "Tell me how I can help...",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent. Thanks, I'll reply soon.",
+    "error": "Something went wrong. Try again or reach out from your email app.",
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Designed and developed with care."
+  },
+  "ui": {
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Espanol",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "profile": {
+    "portraitAlt": "Caricature of Eliezer Rojas"
+  },
+  "mascot": {
+    "alt": {
+      "wave": "Elibits panda astronaut waving",
+      "code": "Panda astronaut typing on a laptop",
+      "wrench": "Panda astronaut holding a wrench and giving a thumbs-up",
+      "search": "Panda astronaut looking through a magnifying glass",
+      "code-lap": "Panda astronaut sitting with a laptop on its lap",
+      "globe": "Panda astronaut holding a globe",
+      "lounge": "Panda astronaut working on a laptop in a beanbag",
+      "book": "Panda astronaut reading a book",
+      "design": "Panda astronaut drawing on a graphics tablet",
+      "portrait": "Portrait of the Elibits panda astronaut mascot",
+      "heart": "Panda astronaut winking with a heart",
+      "stars": "Panda astronaut with starry eyes",
+      "headset": "Panda astronaut wearing a headset with a microphone",
+      "goggles": "Panda astronaut wearing tech goggles",
+      "avatar": "Circular avatar of the panda astronaut mascot",
+      "coffee": "Panda astronaut holding a coffee mug",
+      "code-window": "Panda astronaut in front of a code editor window",
+      "point": "Panda astronaut floating and pointing",
+      "think": "Panda astronaut thinking",
+      "idea": "Panda astronaut pointing at a star idea"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The page you're looking for doesn't exist or was moved.",
+    "back": "Back to home",
+    "sceneAlt": "Pandiux standing by a broken monitor that reads 404"
+  }
+}

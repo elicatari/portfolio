@@ -1,0 +1,60 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import Mascot from '@/components/media/mascot/Mascot.astro';
+import { timeline } from '@/data/timeline/timeline';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const columns = [
+  { id: 'frontend' as const, tracks: timeline.filter((track) => track.area === 'frontend') },
+  { id: 'backend' as const, tracks: timeline.filter((track) => track.area === 'backend') },
+];
+---
+
+<Section
+  id="trayectoria"
+  kicker={t.timeline.kicker}
+  title={t.timeline.title}
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-4 [&_h2]:text-fluid-xl"
+>
+  <Mascot
+    slot="mascot"
+    pose="think"
+    decorative
+    widths={[160, 240]}
+    sizes="(min-width: 768px) 8rem, 4rem"
+    class="drop-shadow-sm"
+  />
+  <div class="grid gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+    {
+      columns.map((column, columnIndex) => (
+        <div data-reveal style={`--reveal-delay: ${columnIndex * 90}ms`}>
+          <h3 class="text-fluid-base mb-5 font-semibold">{t.timeline[column.id]}</h3>
+          <ol class="border-border relative border-s">
+            {column.tracks.map((track) => (
+              <li class="ms-6 mb-8 last:mb-0">
+                <h4 class="text-fluid-base font-medium">{track.title[lang]}</h4>
+                <p class="text-accent text-fluid-sm mt-0.5">{track.platform[lang]}</p>
+                <ul class="mt-3 space-y-1.5">
+                  {track.courses.map((course) => (
+                    <li class="text-text text-fluid-sm leading-relaxed">
+                      <span class="text-muted">~</span>
+                      {` ${course.title[lang]}`}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))
+    }
+  </div>
+</Section>

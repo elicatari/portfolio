@@ -1,0 +1,47 @@
+---
+title: 'Happy Pet'
+summary: 'Agenda pública en producción: el cliente elige día y horario, registra mascota y observaciones, y puede pedir traslado (máximo 4 por día).'
+cover: '../../../assets/projects/happy-pet/hp02.png'
+gallery:
+  - '../../../assets/projects/happy-pet/hp01.png'
+  - '../../../assets/projects/happy-pet/hp02.png'
+  - '../../../assets/projects/happy-pet/hp03.png'
+tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'Docker', 'Cloudflare']
+role: 'Fullstack Developer'
+backendRepoUrl: 'https://github.com/elicatari/grooming-scheduler-api'
+featured: true
+order: 3
+publishedAt: 2026-08-18
+lang: 'es'
+---
+
+## Contexto
+
+A diferencia de Automotriz y BR Logística — paneles internos de operación — Happy Pet es un **producto de autoservicio**. Cualquier cliente entra, ve el calendario, elige un día, consulta horarios libres y reserva sin pasar por el staff.
+
+El negocio dejaba de coordinar por WhatsApp: hacía falta mostrar cupos reales y respetar una regla dura de operación, los **traslados (máximo 4 por día)**.
+
+## Frontend
+
+SPA en **React + TypeScript**, desplegada en Cloudflare, con el mismo enfoque de UI que el resto de sistemas en producción, pero un flujo distinto: de cara al cliente, pensado para móvil.
+
+- Acceso de clientes y administración (login, registro y recuperación de contraseña).
+- Calendario mensual: días pasados bloqueados, día de preferencia y **disponibilidad de horario**.
+- Reserva con datos personales, mascota, observaciones y si necesita traslado.
+- Gestión de mascotas (hasta 10): peso, raza y notas; el peso define el valor del servicio.
+- Listado de reservas propias y cancelación.
+
+El repositorio público es el backend; el frontend sigue el mismo patrón React/TS de los otros proyectos y no está enlazado aquí.
+
+## Backend
+
+Ahí está lo distinto. La API (**Java + Spring Boot + PostgreSQL**) no se limita a validar en la aplicación: la disponibilidad y el cupo de traslados se **garantizan en la base de datos**, para que dos clientes no se lleven el mismo horario ni el quinto traslado del día.
+
+- Dominio formal: reglas de negocio trazables en tests.
+- Concurrencia en PostgreSQL (no solo checks en código).
+- CI con pruebas de carrera, mutación y e2e.
+- Docker para un entorno reproducible.
+
+## Resultado
+
+Los clientes agendan solos. El calendario muestra cupos reales y el límite de 4 traslados por día se cumple aunque coincidan varias reservas a la vez.

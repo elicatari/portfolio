@@ -1,0 +1,22 @@
+---
+import Hero from '@/components/sections/hero/Hero.astro';
+import About from '@/components/sections/about/About.astro';
+import Timeline from '@/components/sections/timeline/Timeline.astro';
+import Skills from '@/components/sections/skills/Skills.astro';
+import ProjectsGrid from '@/components/sections/projects-grid/ProjectsGrid.astro';
+import ContactForm from '@/components/sections/contact-form/ContactForm.astro';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Hero lang={lang} />
+<ProjectsGrid lang={lang} />
+<About lang={lang} />
+<Timeline lang={lang} />
+<Skills lang={lang} />
+<ContactForm lang={lang} />

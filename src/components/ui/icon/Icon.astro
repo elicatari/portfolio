@@ -1,0 +1,27 @@
+---
+import { Icon as AstroIcon } from 'astro-icon/components';
+import { cn } from '@/lib/utils/cn/cn';
+
+interface Props {
+  /** Nombre Iconify, ej. "lucide:sun" o "simple-icons:react". */
+  name: string;
+  /** Tamano en px (aplica width y height). */
+  size?: number;
+  class?: string;
+  style?: string;
+  /** Texto accesible; si se omite, el icono es decorativo (aria-hidden). */
+  title?: string;
+}
+
+const { name, size = 20, class: className, style, title } = Astro.props;
+---
+
+<AstroIcon
+  name={name}
+  width={size}
+  height={size}
+  class={cn('inline-block shrink-0', className)}
+  style={style}
+  title={title}
+  aria-hidden={title ? undefined : 'true'}
+/>

@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@/layouts/base/BaseLayout.astro';
+import HomeSections from '@/components/sections/home/HomeSections.astro';
+import { site } from '@/data/site/site';
+
+const lang = 'en' as const;
+---
+
+<BaseLayout lang={lang} title={site.name} description={site.description[lang]} alternate="/" isHome>
+  <HomeSections lang={lang} />
+</BaseLayout>

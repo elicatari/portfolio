@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import poster from '@/assets/profile/logo-poster.svg';
+import { cn } from '@/lib/utils/cn/cn';
+
+interface Props {
+  /** Ruta al modelo .glb (en /public/models). */
+  modelUrl?: string;
+  alt?: string;
+  class?: string;
+}
+
+// TODO: colocar el logo.glb real (glTF Binary + Draco) en /public/models.
+const { modelUrl = '/models/logo.glb', alt = 'Logo', class: className } = Astro.props;
+---
+
+<div
+  data-logo-3d
+  data-model={modelUrl}
+  class={cn('relative aspect-square w-full max-w-sm select-none', className)}
+>
+  <Image
+    src={poster}
+    alt={alt}
+    widths={[400, 700]}
+    sizes="(min-width: 1024px) 24rem, 70vw"
+    class="h-full w-full object-contain transition-opacity duration-700 ease-[var(--ease-out-soft)]"
+    data-logo-poster
+  />
+  <canvas
+    data-logo-canvas
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 h-full w-full opacity-0 transition-opacity duration-700 ease-[var(--ease-out-soft)]"
+  ></canvas>
+</div>
+
+<script>
+  import { initLogo3D } from '@/components/media/logo-3d/logo-3d.client';
+
+  function initLogo() {
+    const root = document.querySelector<HTMLElement>('[data-logo-3d]');
+    if (!root || root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+
+    const canvas = root.querySelector<HTMLCanvasElement>('[data-logo-canvas]');
+    const posterEl = root.querySelector<HTMLElement>('[data-logo-poster]');
+    const modelUrl = root.dataset.model;
+    if (!canvas || !modelUrl) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Con reduced-motion se mantiene el poster (cero JS 3D).
+    if (reducedMotion) return;
+
+    const load = async () => {
+      try {
+        await initLogo3D({ canvas, modelUrl, reducedMotion });
+        canvas.style.opacity = '1';
+        if (posterEl) posterEl.style.opacity = '0';
+      } catch {
+        // Fallo de carga (modelo ausente o WebGL no disponible): se queda el poster.
+        canvas.style.display = 'none';
+      }
+    };
+
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            obs.disconnect();
+            void load();
+          }
+        });
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(root);
+  }
+
+  initLogo();
+  document.addEventListener('astro:page-load', initLogo);
+</script>

@@ -1,0 +1,47 @@
+---
+title: 'Happy Pet'
+summary: 'Public booking in production: clients pick a day and time slot, add pet details and notes, and can request pickup (max 4 transfers a day).'
+cover: '../../../assets/projects/happy-pet/hp02.png'
+gallery:
+  - '../../../assets/projects/happy-pet/hp01.png'
+  - '../../../assets/projects/happy-pet/hp02.png'
+  - '../../../assets/projects/happy-pet/hp03.png'
+tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'Docker', 'Cloudflare']
+role: 'Fullstack Developer'
+backendRepoUrl: 'https://github.com/elicatari/grooming-scheduler-api'
+featured: true
+order: 3
+publishedAt: 2026-08-18
+lang: 'en'
+---
+
+## Context
+
+Unlike Automotriz and BR Logística — internal operations panels — Happy Pet is a **self-service product**. Any client can open the calendar, pick a day, see open slots and book without going through staff.
+
+The salon was coordinating over WhatsApp. It needed real availability on screen and a hard operational rule: **transfers (max 4 per day)**.
+
+## Frontend
+
+A **React + TypeScript** SPA on Cloudflare, same UI approach as the other production systems, but a different flow: customer-facing and built for mobile.
+
+- Client and admin access (login, sign-up and password recovery).
+- Monthly calendar: past days locked, preferred day and **time-slot availability**.
+- Booking with personal data, pet details, notes and whether a transfer is needed.
+- Pet management (up to 10): weight, breed and notes; weight sets the service price.
+- Own bookings list and cancellation.
+
+The public repository is the backend; the frontend follows the same React/TS pattern as the other projects and is not linked here.
+
+## Backend
+
+That is the distinctive part. The API (**Java + Spring Boot + PostgreSQL**) does not stop at application-level checks: slot availability and the transfer cap are **enforced in the database**, so two clients cannot take the same slot or a fifth transfer on the same day.
+
+- Formal domain: business rules traced in tests.
+- Concurrency guaranteed in PostgreSQL (not only in code).
+- CI with race, mutation and e2e tests.
+- Docker for a reproducible environment.
+
+## Outcome
+
+Clients book on their own. The calendar shows real slots, and the 4-transfers-per-day cap holds even when bookings arrive at the same time.

@@ -1,0 +1,126 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mi",
+    "skills": "Skills",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "¡Hola Mundo!, soy",
+    "roles": "Desarrollador Fullstack Enfocado en Frontend / Diseñador Gráfico",
+    "summary": [
+      "Soy un desarrollador que construye experiencias web interactivas con TypeScript y React, junto con APIs robustas desarrolladas con Java y Spring Boot. Cuento con experiencia práctica fusionando el desarrollo de software con mi formación en diseño gráfico, lo que me permite integrar criterios de composición, identidad visual y experiencia de usuario en el proceso de creación, buscando un equilibrio entre estética, usabilidad y calidad técnica. Mi perfil se complementa con el manejo de persistencia de datos mediante Hibernate y JPA, bases de datos como PostgreSQL y MongoDB, además de herramientas esenciales como Docker y GitHub.",
+      "Poseo dos formaciones profesionales: soy Técnico Superior Universitario (TSU) en Informática y Diseñador Gráfico. Continúo capacitándome y adquiriendo nuevos conocimientos de manera autodidacta."
+    ],
+    "ctaCv": "Descargar CV",
+    "ctaContact": "Hablemos",
+    "sceneAlt": "Ilustracion de elicatari: panda astronauta programando en el espacio"
+  },
+  "about": {
+    "title": "Sobre mi",
+    "kicker": "Quien soy",
+    "loveTitle": "Lo que me gusta",
+    "bioTitle": "Bio",
+    "path": "Mi camino no empezó directamente entre líneas de código, sino explorando la comunicación visual como diseñador gráfico. Con el tiempo, mi curiosidad por saber cómo funcionaba todo por dentro me llevó al mundo de la informática y el desarrollo de software. Hoy no veo el diseño y el código como áreas separadas, sino como dos caras de una misma solución.",
+    "mascot": "¿Y esa mascota? Si te preguntas por el pequeño panda que habita en este portfolio, su nombre es Pandiux. Nació de un juego de palabras entre los pandas, la experiencia de usuario (UI/UX) y el software libre GNU/Linux. Es la mascota oficial de mi espacio digital.",
+    "elibits": "Una curiosidad más... ¿Descubriste el easter egg de EliBits? Es la identidad con la que presto servicios independientes de consultoría técnica, soporte especializado y desarrollo de software."
+  },
+  "timeline": {
+    "title": "Roadmap",
+    "kicker": "Formación autodidacta",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "skills": {
+    "title": "Skills",
+    "kicker": "Herramientas que uso",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Bases de datos",
+      "tools": "Herramientas",
+      "design": "Diseño"
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "kicker": "Trabajo seleccionado",
+    "featured": "Destacado",
+    "inProduction": "En producción · Cloudflare + Railway",
+    "viewProject": "Ver proyecto",
+    "back": "Volver a proyectos",
+    "role": "Rol",
+    "tech": "Tecnologias",
+    "liveDemo": "Ver en vivo",
+    "codeSampleFrontend": "Sample frontend",
+    "codeSampleBackend": "Sample backend",
+    "gallery": "Galeria",
+    "openGallery": "Ampliar imagen",
+    "closeGallery": "Cerrar imagen",
+    "prevGallery": "Imagen anterior",
+    "nextGallery": "Imagen siguiente"
+  },
+  "contact": {
+    "title": "Contacto",
+    "kicker": "Hablemos",
+    "subtitle": "Cuéntame sobre tu proyecto o idea y te respondo a la brevedad.",
+    "emailLink": "Abre tu app de correo preferida",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntame en qué puedo ayudarte...",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "Mensaje enviado. Gracias, te respondo pronto.",
+    "error": "Hubo un problema al enviar. Inténtalo de nuevo o escríbeme desde tu app de correo.",
+    "required": "Este campo es obligatorio.",
+    "invalidEmail": "Ingresa un email valido."
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "builtWith": "Diseñado y desarrollado con dedicacion."
+  },
+  "ui": {
+    "toggleTheme": "Cambiar tema",
+    "switchLanguage": "English",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Cerrar menu",
+    "skipToContent": "Saltar al contenido"
+  },
+  "profile": {
+    "portraitAlt": "Caricatura de Eliezer Rojas"
+  },
+  "mascot": {
+    "alt": {
+      "wave": "Panda astronauta de Elibits saludando",
+      "code": "Panda astronauta escribiendo en un portatil",
+      "wrench": "Panda astronauta con llave inglesa y pulgar arriba",
+      "search": "Panda astronauta mirando por una lupa",
+      "code-lap": "Panda astronauta sentado con un portatil en el regazo",
+      "globe": "Panda astronauta sosteniendo un globo terraqueo",
+      "lounge": "Panda astronauta trabajando en un puff con portatil",
+      "book": "Panda astronauta leyendo un libro",
+      "design": "Panda astronauta dibujando en una tableta grafica",
+      "portrait": "Retrato de la mascota panda astronauta de Elibits",
+      "heart": "Panda astronauta guiñando un ojo con un corazon",
+      "stars": "Panda astronauta con estrellas en los ojos",
+      "headset": "Panda astronauta con auriculares y microfono",
+      "goggles": "Panda astronauta con gafas tecnicas",
+      "avatar": "Avatar circular de la mascota panda astronauta",
+      "coffee": "Panda astronauta con una taza de cafe",
+      "code-window": "Panda astronauta frente a una ventana de codigo",
+      "point": "Panda astronauta flotando y senalando",
+      "think": "Panda astronauta pensativo",
+      "idea": "Panda astronauta senalando una estrella de idea"
+    }
+  },
+  "notFound": {
+    "title": "Pagina no encontrada",
+    "message": "La pagina que buscas no existe o fue movida.",
+    "back": "Volver al inicio",
+    "sceneAlt": "Pandiux frente a un monitor roto que muestra 404"
+  }
+}

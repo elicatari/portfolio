@@ -1,0 +1,38 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/base/BaseLayout.astro';
+import ProjectDetail from '@/components/sections/project-detail/ProjectDetail.astro';
+import { getProjectsByLang, getProjectSlug, getProjectUrl } from '@/lib/projects/projects';
+
+export const getStaticPaths = (async () => {
+  const [enProjects, esProjects] = await Promise.all([
+    getProjectsByLang('en'),
+    getProjectsByLang('es'),
+  ]);
+  const esSlugs = new Set(esProjects.map(getProjectSlug));
+
+  return enProjects.map((project) => {
+    const slug = getProjectSlug(project);
+    return {
+      params: { slug },
+      props: {
+        project,
+        alternate: esSlugs.has(slug) ? getProjectUrl('es', slug) : '/',
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const lang = 'en' as const;
+const { project, alternate } = Astro.props;
+---
+
+<BaseLayout
+  lang={lang}
+  title={project.data.title}
+  description={project.data.summary}
+  alternate={alternate}
+  article
+>
+  <ProjectDetail project={project} lang={lang} backHref="/en#proyectos" />
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import ProjectCard from '@/components/sections/projects-grid/ProjectCard.astro';
+import { getProjectsByLang, getProjectSlug, getProjectUrl } from '@/lib/projects/projects';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const projects = await getProjectsByLang(lang);
+---
+
+<Section
+  id="proyectos"
+  kicker={t.projects.kicker}
+  title={t.projects.title}
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
+>
+  <div class="grid gap-4 sm:grid-cols-2 sm:gap-5">
+    {
+      projects.map((project, index) => (
+        <div data-reveal style={`--reveal-delay: ${index * 90}ms`}>
+          <ProjectCard
+            project={project}
+            href={getProjectUrl(lang, getProjectSlug(project))}
+            t={t}
+          />
+        </div>
+      ))
+    }
+  </div>
+</Section>

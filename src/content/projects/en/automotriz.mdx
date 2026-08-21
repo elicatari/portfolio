@@ -1,0 +1,42 @@
+---
+title: 'Automotive'
+summary: 'Automotive ERP in production: public catalog plus sales, reservations and work-order admin. Frontend on Cloudflare Pages, API on Railway.'
+cover: '../../../assets/projects/automotriz/automotriz03.png'
+gallery:
+  - '../../../assets/projects/automotriz/automotriz01.png'
+  - '../../../assets/projects/automotriz/automotriz02.png'
+  - '../../../assets/projects/automotriz/automotriz03.png'
+  - '../../../assets/projects/automotriz/automotriz04.png'
+  - '../../../assets/projects/automotriz/automotriz05.png'
+tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'Docker', 'Cloudflare']
+role: 'Fullstack Developer'
+frontendRepoUrl: 'https://github.com/elicatari/automotive-erp-web'
+backendRepoUrl: 'https://github.com/elicatari/automotive-erp-core-api'
+liveUrl: 'https://www.realmotors.cl'
+featured: true
+order: 1
+publishedAt: 2024-09-12
+lang: 'en'
+---
+
+## Context
+
+**RealMotors** is an automotive ERP in production: the business needed a public vehicle catalog and an internal panel to run sales, stock and the workshop in one system, without spreadsheets or WhatsApp as the source of truth.
+
+## Frontend
+
+A **React + TypeScript** SPA on Cloudflare Pages. There is a public catalog and an admin panel with operations modules:
+
+- **Vehicles:** inventory with photo, VIN, color, engine, price and status (available, etc.), search by make, model or VIN, create plus CSV import/export.
+- **Parts and accessories:** stock by SKU, brand and category, with low-stock alerts.
+- **Sales notes, reservations and work orders (OT):** commercial and workshop flow in the same panel.
+- **Quick quote:** a WhatsApp message with the import breakdown.
+- Role-restricted access (login to the management panel).
+
+## Backend
+
+**Java + Spring Boot** API on Railway with **PostgreSQL**. Modular monolith: inventory, sales, reservations and work orders as separate domains, JWT auth and persistence with JPA + Flyway.
+
+## Outcome
+
+A production system at [realmotors.cl](https://www.realmotors.cl): a catalog for customers and a panel for the team, with vehicles, parts and sales/workshop documents in one flow.

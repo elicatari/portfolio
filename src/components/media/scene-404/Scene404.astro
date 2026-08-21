@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { cn } from '@/lib/utils/cn/cn';
+import scene1 from '@/assets/scene-404/scene1.png';
+import scene2 from '@/assets/scene-404/scene2.png';
+import scene3 from '@/assets/scene-404/scene3.png';
+import scene4 from '@/assets/scene-404/scene4.png';
+
+interface Props {
+  alt: string;
+  class?: string;
+}
+
+const { alt, class: className } = Astro.props;
+
+/**
+ * Escena 404 estatica (estilo GitHub). scene1 es la ilustracion base;
+ * scene2–4 se superponen para alumbrar el 404. Sin orbitas.
+ */
+const layers = [scene1, scene2, scene3, scene4];
+---
+
+<div
+  role="img"
+  aria-label={alt}
+  class={cn('scene scene-404 relative aspect-square w-full select-none', className)}
+>
+  {
+    layers.map((src, index) => (
+      <Image
+        src={src}
+        alt=""
+        aria-hidden="true"
+        loading={index === 0 ? 'eager' : 'lazy'}
+        widths={[440, 640, 900]}
+        sizes="(min-width: 1024px) 28rem, 22rem"
+        class="scene-layer pointer-events-none absolute inset-0 h-full w-full object-contain"
+      />
+    ))
+  }
+</div>

@@ -1,0 +1,49 @@
+# Documentacion interna (no se sube al repo)
+docs/
+README.local.md
+
+# Dependencias
+node_modules/
+.pnp
+.pnp.*
+
+# Build / output
+dist/
+.output/
+.vercel/
+.netlify/
+
+# Astro
+.astro/
+
+# Cloudflare / Wrangler
+.wrangler/
+.dev.vars
+
+# Variables de entorno / secretos
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache y temporales
+.cache/
+.temp/
+*.tsbuildinfo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp

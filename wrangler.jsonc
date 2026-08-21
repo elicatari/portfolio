@@ -1,0 +1,13 @@
+{
+  // Config opcional para desarrollo local de Pages Functions:
+  //   pnpm build && pnpm dlx wrangler pages dev dist
+  // RESEND_API_KEY se configura como secreto en el dashboard de Cloudflare.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-07-15",
+  "vars": {
+    "CONTACT_FROM": "Eliezer R. Catari <dev@elicatari.com>",
+    "CONTACT_TO": "dev@elicatari.com"
+  }
+}

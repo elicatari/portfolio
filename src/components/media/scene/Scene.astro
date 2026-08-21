@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import { cn } from '@/lib/utils/cn/cn';
+import scene1 from '@/assets/scene/scene1.png';
+import scene2 from '@/assets/scene/scene2.png';
+import scene3 from '@/assets/scene/scene3.png';
+import scene4 from '@/assets/scene/scene4.png';
+import scene5 from '@/assets/scene/scene5.png';
+import type { Lang } from '@/types';
+
+interface Props {
+  alt: string;
+  lang: Lang;
+  class?: string;
+}
+
+const { alt, lang, class: className } = Astro.props;
+
+/**
+ * Las 4 imagenes comparten lienzo (1100x1188) y se superponen para componer
+ * una sola escena. Cada capa tiene su propia orbita lenta (duracion, retardo
+ * y amplitud distintos) para un efecto de flotacion espacial independiente.
+ * scene4 es la capa del escritorio en ES; scene5 es la misma capa con textos EN.
+ */
+const deskLayer = lang === 'en' ? scene5 : scene4;
+
+const layers = [
+  { src: scene3, motion: 'scene-layer--bg' },
+  { src: scene2, motion: 'scene-layer--crate' },
+  { src: deskLayer, motion: 'scene-layer--desk' },
+  { src: scene1, motion: 'scene-layer--hero' },
+];
+---
+
+<div
+  role="img"
+  aria-label={alt}
+  class={cn('scene relative aspect-[1100/1188] w-full select-none', className)}
+>
+  {
+    layers.map((layer, index) => (
+      <Image
+        src={layer.src}
+        alt=""
+        aria-hidden="true"
+        loading={index === layers.length - 1 ? 'eager' : 'lazy'}
+        widths={[440, 640, 900]}
+        sizes="(min-width: 1024px) 26rem, 22rem"
+        class={cn(
+          'scene-layer pointer-events-none absolute inset-0 h-full w-full object-contain',
+          layer.motion,
+        )}
+      />
+    ))
+  }
+</div>

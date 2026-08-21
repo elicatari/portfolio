@@ -1,0 +1,108 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import Badge from '@/components/ui/badge/Badge.astro';
+import Mascot from '@/components/media/mascot/Mascot.astro';
+import { about } from '@/data/about/about';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const loves = about.loves[lang];
+---
+
+<Section
+  id="sobre-mi"
+  kicker={t.about.kicker}
+  title={t.about.title}
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
+>
+  <div>
+    <p class="text-text text-fluid-sm leading-relaxed" data-reveal>
+      {t.about.path}
+    </p>
+
+    <div class="mt-4 flex items-start gap-3" data-reveal style="--reveal-delay: 60ms">
+      <div class="mascot-float w-14 shrink-0 sm:w-16">
+        <Mascot
+          pose="portrait"
+          decorative
+          widths={[80, 128]}
+          sizes="4rem"
+          class="drop-shadow-sm"
+        />
+      </div>
+      <p class="text-text text-fluid-sm leading-relaxed">
+        {
+          t.about.mascot.split('Pandiux').map((part, index) =>
+            index === 0 ? (
+              part
+            ) : (
+              <>
+                <span class="text-link font-semibold">Pandiux</span>
+                {part}
+              </>
+            ),
+          )
+        }
+      </p>
+    </div>
+
+    <p class="text-text text-fluid-sm mt-4 leading-relaxed" data-reveal style="--reveal-delay: 90ms">
+      {
+        t.about.elibits.split('EliBits').map((part, index) =>
+          index === 0 ? (
+            part
+          ) : (
+            <>
+              <span class="text-link font-semibold">EliBits</span>
+              {part}
+            </>
+          ),
+        )
+      }
+    </p>
+
+    <div class="mt-8" data-reveal style="--reveal-delay: 120ms">
+      <h3 class="text-fluid-sm mb-3 font-semibold">{t.about.bioTitle}</h3>
+      <ul class="space-y-3">
+        {
+          about.bio.map((entry) => (
+            <li class="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
+              <span class="text-accent text-fluid-sm shrink-0 font-semibold sm:w-14">{entry.year}</span>
+              <span class="text-text text-fluid-sm leading-relaxed">{entry.text[lang]}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="mt-8" data-reveal style="--reveal-delay: 160ms">
+      <div class="mb-3 flex items-center gap-2.5">
+        <h3 class="text-fluid-sm font-semibold">{t.about.loveTitle}</h3>
+        <div class="mascot-float-delayed mascot-float w-11 shrink-0 sm:w-12">
+          <Mascot
+            pose="coffee"
+            decorative
+            widths={[64, 96]}
+            sizes="3rem"
+            class="drop-shadow-sm"
+          />
+        </div>
+      </div>
+      <ul class="flex flex-wrap gap-2">
+        {
+          loves.map((love) => (
+            <li>
+              <Badge>{love}</Badge>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

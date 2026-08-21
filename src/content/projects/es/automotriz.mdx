@@ -1,0 +1,42 @@
+---
+title: 'Automotriz'
+summary: 'ERP automotriz en producción: catálogo público, panel de ventas, reservas y OT. Frontend en Cloudflare Pages y API en Railway.'
+cover: '../../../assets/projects/automotriz/automotriz03.png'
+gallery:
+  - '../../../assets/projects/automotriz/automotriz01.png'
+  - '../../../assets/projects/automotriz/automotriz02.png'
+  - '../../../assets/projects/automotriz/automotriz03.png'
+  - '../../../assets/projects/automotriz/automotriz04.png'
+  - '../../../assets/projects/automotriz/automotriz05.png'
+tags: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'Docker', 'Cloudflare']
+role: 'Fullstack Developer'
+frontendRepoUrl: 'https://github.com/elicatari/automotive-erp-web'
+backendRepoUrl: 'https://github.com/elicatari/automotive-erp-core-api'
+liveUrl: 'https://www.realmotors.cl'
+featured: true
+order: 1
+publishedAt: 2024-09-12
+lang: 'es'
+---
+
+## Contexto
+
+**RealMotors** es un ERP automotriz en producción: el negocio necesitaba un catálogo público de vehículos y un panel interno para operar ventas, stock y taller en un solo sistema, sin planillas ni WhatsApp como fuente de verdad.
+
+## Frontend
+
+SPA en **React + TypeScript** (Cloudflare Pages). Hay un catálogo público y un panel de administración con módulos de operación:
+
+- **Vehículos:** inventario con foto, VIN, color, motor, precio y estado (disponible, etc.), búsqueda por marca, modelo o VIN, alta e importación/exportación CSV.
+- **Repuestos y accesorios:** stock por SKU, marca y categoría, con alerta de existencias bajas.
+- **Notas de venta, reservas y órdenes de trabajo (OT):** el flujo comercial y de taller en el mismo panel.
+- **Cotización rápida:** mensaje de WhatsApp con desglose de importación.
+- Acceso restringido por rol (login al panel de gestión).
+
+## Backend
+
+API en **Java + Spring Boot** (Railway) con **PostgreSQL**. Monolito modular: inventario, ventas, reservas y OT como dominios separados, autenticación JWT y persistencia con JPA + Flyway.
+
+## Resultado
+
+Un sistema en producción en [realmotors.cl](https://www.realmotors.cl): catálogo para el cliente y panel para el equipo, con vehículos, repuestos y documentos de venta/taller en un mismo flujo.

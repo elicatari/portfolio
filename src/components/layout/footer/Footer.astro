@@ -1,0 +1,50 @@
+---
+import Container from '@/components/layout/container/Container.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import { site } from '@/data/site/site';
+import { socials } from '@/data/socials/socials';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-border border-t py-4 sm:py-5 lg:py-6">
+  <Container>
+    <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+      <div class="text-center sm:text-left">
+        <p class="text-fluid-sm font-semibold">{site.name}</p>
+        <p class="text-fluid-sm text-muted">
+          &copy; {year} · {t.footer.rights}
+        </p>
+      </div>
+
+      <ul class="flex items-center gap-1">
+        {
+          socials.map((social) => (
+            <li>
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                title={social.name}
+                class="text-muted hover:bg-surface hover:text-accent focus-visible:outline-accent inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <Icon name={social.icon} size={16} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <p class="text-fluid-sm text-muted mt-3 text-center">{t.footer.builtWith}</p>
+  </Container>
+</footer>

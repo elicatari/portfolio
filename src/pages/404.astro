@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/base/BaseLayout.astro';
+import Container from '@/components/layout/container/Container.astro';
+import Button from '@/components/ui/button/Button.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import Scene404 from '@/components/media/scene-404/Scene404.astro';
+import { getLangFromUrl, localizePath, useTranslations, getAlternateLang } from '@/i18n/utils/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homeHref = localizePath('/', lang);
+const alternate = localizePath('/', getAlternateLang(lang));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.notFound.title}
+  description={t.notFound.message}
+  alternate={alternate}
+  noindex
+>
+  <section class="relative pb-8 sm:pb-10 lg:pb-12">
+    <Container>
+      <div class="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+        <div data-reveal>
+          <h1 class="text-fluid-xl font-bold tracking-tight">{t.notFound.title}</h1>
+          <p class="text-muted text-fluid-sm mt-3 max-w-md leading-relaxed">{t.notFound.message}</p>
+          <Button href={homeHref} variant="primary" size="sm" class="mt-6">
+            <Icon name="lucide:arrow-left" size={16} />
+            {t.notFound.back}
+          </Button>
+        </div>
+
+        <div
+          class="relative mx-auto w-full max-w-[18rem] sm:max-w-[22rem] lg:mx-0 lg:ml-auto lg:max-w-[26rem]"
+          data-reveal
+          style="--reveal-delay: 80ms"
+        >
+          <Scene404 alt={t.notFound.sceneAlt} />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -1,0 +1,141 @@
+---
+import Container from '@/components/layout/container/Container.astro';
+import Nav from '@/components/layout/nav/Nav.astro';
+import ThemeToggle from '@/components/ui/theme-toggle/ThemeToggle.astro';
+import LangSwitcher from '@/components/ui/lang-switcher/LangSwitcher.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import { site } from '@/data/site/site';
+import { useTranslations, localizePath, getAlternateLang } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+  /** true en la home (anclas relativas). false en detalle (anclas hacia la home). */
+  isHome?: boolean;
+  /** URL equivalente en el otro idioma. */
+  alternate: string;
+}
+
+const { lang, isHome = false, alternate } = Astro.props;
+const t = useTranslations(lang);
+const homeHref = localizePath('/', lang);
+const anchorBase = isHome ? '' : homeHref;
+const targetLang = getAlternateLang(lang);
+---
+
+<header
+  data-site-header
+  class="data-[scrolled=true]:border-border data-[scrolled=true]:bg-bg/80 fixed inset-x-0 top-0 z-50 border-b border-transparent transition-colors duration-300 data-[scrolled=true]:backdrop-blur-md"
+>
+  <Container>
+    <div class="flex h-14 items-center justify-between gap-3 sm:h-16">
+      <a
+        href={homeHref}
+        class="text-fluid-sm text-link hover:brightness-110 font-semibold transition-colors"
+      >
+        {site.nickname}
+      </a>
+
+      <nav class="hidden md:block" aria-label={t.nav.home}>
+        <Nav lang={lang} anchorBase={anchorBase} />
+      </nav>
+
+      <div class="flex items-center gap-1">
+        <LangSwitcher href={alternate} targetLang={targetLang} label={t.ui.switchLanguage} />
+        <ThemeToggle label={t.ui.toggleTheme} />
+
+        <button
+          type="button"
+          data-menu-toggle
+          data-open-label={t.ui.openMenu}
+          data-close-label={t.ui.closeMenu}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label={t.ui.openMenu}
+          class="text-muted hover:bg-surface hover:text-text focus-visible:outline-accent relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden"
+        >
+          <Icon name="lucide:menu" size={22} class="menu-open-icon pointer-events-none" />
+          <Icon name="lucide:x" size={22} class="menu-close-icon pointer-events-none hidden" />
+        </button>
+      </div>
+    </div>
+  </Container>
+
+  <div
+    id="mobile-menu"
+    data-menu-panel
+    hidden
+    class="border-border bg-bg/95 hidden border-t backdrop-blur-md md:hidden"
+  >
+    <Container>
+      <Nav
+        lang={lang}
+        anchorBase={anchorBase}
+        class="flex-col items-stretch gap-1 py-4"
+        linkClass="block px-3 py-2.5"
+      />
+    </Container>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    const header = document.querySelector<HTMLElement>('[data-site-header]');
+    if (!header) return;
+
+    const onScroll = () => {
+      header.dataset.scrolled = window.scrollY > 12 ? 'true' : 'false';
+    };
+    onScroll();
+
+    // ClientRouter dispara astro:page-load tambien en la carga inicial;
+    // sin este guard el click abre y cierra el menu en el mismo tap.
+    if (header.dataset.bound === 'true') return;
+    header.dataset.bound = 'true';
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const panel = header.querySelector<HTMLElement>('[data-menu-panel]');
+    if (!toggle || !panel) return;
+
+    const openIcon = toggle.querySelector('.menu-open-icon');
+    const closeIcon = toggle.querySelector('.menu-close-icon');
+
+    const setOpen = (open: boolean) => {
+      panel.hidden = !open;
+      panel.classList.toggle('hidden', !open);
+      panel.classList.toggle('block', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute(
+        'aria-label',
+        open ? (toggle.dataset.closeLabel ?? '') : (toggle.dataset.openLabel ?? ''),
+      );
+      openIcon?.classList.toggle('hidden', open);
+      closeIcon?.classList.toggle('hidden', !open);
+    };
+
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setOpen(panel.hidden);
+    });
+
+    panel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 768px)').matches) setOpen(false);
+    });
+  }
+
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
+</script>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import { getMascotPose } from '@/data/mascot/mascot';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils/utils';
+import { cn } from '@/lib/utils/cn/cn';
+import type { MascotPoseId } from '@/types';
+
+interface Props {
+  pose: MascotPoseId;
+  /** Sobrescribe el alt i18n. Ignorado si `decorative`. */
+  alt?: string;
+  /** Si true, alt vacio (acento visual junto a un heading). */
+  decorative?: boolean;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  pose,
+  alt: altProp,
+  decorative = false,
+  class: className,
+  widths = [200, 400, 640],
+  sizes = '(min-width: 1024px) 16rem, 40vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+} = Astro.props;
+
+const entry = getMascotPose(pose);
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const alt = decorative ? '' : (altProp ?? t.mascot.alt[pose]);
+---
+
+<Image
+  src={entry.src}
+  alt={alt}
+  widths={widths}
+  sizes={sizes}
+  class={cn('h-auto w-full object-contain', className)}
+  loading={loading}
+  decoding="async"
+  fetchpriority={fetchpriority}
+/>

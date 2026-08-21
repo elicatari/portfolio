@@ -1,0 +1,197 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import Button from '@/components/ui/button/Button.astro';
+import Icon from '@/components/ui/icon/Icon.astro';
+import Mascot from '@/components/media/mascot/Mascot.astro';
+import { site } from '@/data/site/site';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const inputClass =
+  'w-full rounded-md border border-border bg-bg px-3 py-2.5 text-fluid-sm text-text transition-colors placeholder:text-muted/70 focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+---
+
+<Section
+  id="contacto"
+  kicker={t.contact.kicker}
+  title={t.contact.title}
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
+>
+  <Mascot
+    slot="mascot"
+    pose="book"
+    decorative
+    widths={[160, 240]}
+    sizes="(min-width: 768px) 8rem, 4rem"
+    class="drop-shadow-sm"
+  />
+
+  <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.25fr] lg:gap-8">
+    <div class="space-y-4" data-reveal>
+      <p class="text-muted text-fluid-sm max-w-md leading-relaxed">{t.contact.subtitle}</p>
+      <a
+        href={`mailto:${site.email}`}
+        class="text-link text-fluid-sm inline-flex items-center gap-2 font-medium hover:underline"
+      >
+        <Icon name="lucide:mail" size={16} />
+        {t.contact.emailLink}
+      </a>
+    </div>
+
+    <form data-contact-form class="space-y-4" data-reveal style="--reveal-delay: 80ms" novalidate>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="name" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.name}</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder={t.contact.namePlaceholder}
+            class={inputClass}
+          />
+        </div>
+        <div>
+          <label for="email" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.email}</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder={t.contact.emailPlaceholder}
+            class={inputClass}
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="message" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.message}</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="4"
+          placeholder={t.contact.messagePlaceholder}
+          class={inputClass}></textarea>
+      </div>
+
+      {/* Honeypot anti-spam: oculto para usuarios, visible para bots. */}
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <Button type="submit" variant="primary" size="sm" data-submit>
+          <span data-label-idle class="inline-flex items-center gap-2">
+            {t.contact.send}
+            <Icon name="lucide:send" size={16} />
+          </span>
+          <span data-label-sending class="hidden items-center gap-2">
+            <Icon name="lucide:loader-circle" size={16} class="animate-spin" />
+            {t.contact.sending}
+          </span>
+        </Button>
+
+        <p
+          data-status
+          role="status"
+          aria-live="polite"
+          class="text-fluid-sm data-[state=success]:text-accent-2 data-[state=error]:text-accent font-medium"
+        >
+        </p>
+      </div>
+    </form>
+  </div>
+</Section>
+
+<script
+  is:inline
+  define:vars={{
+    strings: {
+      required: t.contact.required,
+      invalidEmail: t.contact.invalidEmail,
+      success: t.contact.success,
+      error: t.contact.error,
+    },
+  }}
+>
+  function initContactForm() {
+    const form = document.querySelector('[data-contact-form]');
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const status = form.querySelector('[data-status]');
+    const submit = form.querySelector('[data-submit]');
+    const idle = form.querySelector('[data-label-idle]');
+    const sending = form.querySelector('[data-label-sending]');
+
+    const setStatus = (message, state) => {
+      status.textContent = message;
+      if (state) status.dataset.state = state;
+      else delete status.dataset.state;
+    };
+
+    const setSending = (isSending) => {
+      submit.disabled = isSending;
+      idle.classList.toggle('hidden', isSending);
+      idle.classList.toggle('inline-flex', !isSending);
+      sending.classList.toggle('hidden', !isSending);
+      sending.classList.toggle('inline-flex', isSending);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const message = String(data.get('message') || '').trim();
+
+      if (!name || !email || !message) {
+        setStatus(strings.required, 'error');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setStatus(strings.invalidEmail, 'error');
+        return;
+      }
+
+      setSending(true);
+      setStatus('', null);
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            company: String(data.get('company') || ''),
+          }),
+        });
+
+        if (!res.ok) throw new Error('Request failed');
+
+        form.reset();
+        setStatus(strings.success, 'success');
+      } catch {
+        setStatus(strings.error, 'error');
+      } finally {
+        setSending(false);
+      }
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
+</script>

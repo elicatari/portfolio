@@ -1,0 +1,130 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '@/components/layout/header/Header.astro';
+import Footer from '@/components/layout/footer/Footer.astro';
+import SpaceBackdrop from '@/components/layout/space-backdrop/SpaceBackdrop.astro';
+import Seo from '@/components/seo/head/Seo.astro';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** Ruta equivalente en el otro idioma (para hreflang y switcher). */
+  alternate: string;
+  isHome?: boolean;
+  ogImage?: string;
+  article?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang,
+  alternate,
+  isHome = false,
+  ogImage,
+  article = false,
+  noindex = false,
+} = Astro.props;
+
+const t = useTranslations(lang);
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link
+      rel="preload"
+      href="/fonts/ubuntu-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    {/* Anti-flash: aplica el tema antes del primer paint y tras cada navegacion del ClientRouter. */}
+    <script is:inline>
+      (function () {
+        function applyTheme() {
+          try {
+            const stored = localStorage.getItem('theme');
+            const dark = stored
+              ? stored === 'dark'
+              : window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.toggle('dark', dark);
+          } catch {
+            /* noop */
+          }
+        }
+        applyTheme();
+        // El ClientRouter reemplaza el <html> por el del servidor (sin clase dark);
+        // reaplicamos el tema justo despues del swap, antes del paint.
+        document.addEventListener('astro:after-swap', applyTheme);
+      })();
+    </script>
+
+    <Seo
+      title={title}
+      description={description}
+      lang={lang}
+      path={path}
+      alternatePath={alternate}
+      ogImage={ogImage}
+      article={article}
+      noindex={noindex}
+    />
+
+    <ClientRouter />
+  </head>
+
+  <body>
+    <SpaceBackdrop />
+    <a href="#main" class="skip-link">{t.ui.skipToContent}</a>
+
+    <Header lang={lang} isHome={isHome} alternate={alternate} />
+
+    <main id="main" class="pt-14 sm:pt-16">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+
+    <script>
+      // Scroll-reveal global: revela elementos [data-reveal] al entrar en viewport.
+      function initReveal() {
+        const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+        if (els.length === 0) return;
+
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+        );
+
+        els.forEach((el) => observer.observe(el));
+      }
+
+      initReveal();
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
+  </body>
+</html>

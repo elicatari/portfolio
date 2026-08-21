@@ -1,0 +1,34 @@
+---
+title: 'DTE Issuer'
+summary: 'Microservicio de emisión DTE (Chile): folio escaso, multi-tenant con Keycloak, idempotencia y outbox hacia RabbitMQ. SII simulado — no es una boleta real ni homologación.'
+cover: '../../../assets/projects/dte-issuer/dte01.png'
+gallery:
+  - '../../../assets/projects/dte-issuer/dte01.png'
+tags: ['Java', 'Spring Boot', 'Keycloak', 'RabbitMQ', 'PostgreSQL', 'Docker']
+role: 'Backend Developer'
+backendRepoUrl: 'https://github.com/elicatari/dte-issuer-core'
+featured: false
+order: 4
+publishedAt: 2026-08-20
+lang: 'es'
+---
+
+## Contexto
+
+**DTE Issuer** es un microservicio de emisión de documentos tributarios electrónicos (Boleta 39) para que un POS o ERP — Automotriz, BR Logística, Happy Pet — emita sin conocer el SII. Un proceso, una base, un contrato HTTP.
+
+El **SII es un stub**: no hay XML firmado ni homologación. El foco está en los invariantes de emisión, no en facturación fiscal real.
+
+## Backend
+
+API en **Java 21 + Spring Boot** con arquitectura hexagonal, **Keycloak** (JWT con `tenant_id`) y **PostgreSQL** con RLS. Se levanta con `docker compose up`.
+
+- **Sin folio no hay DTE:** la reserva de folio es una operación del dominio, con bloqueo pesimista por tenant; un IT de concurrencia prueba N POST en paralelo sin huecos ni duplicados.
+- **Multi-tenant en tres capas:** el tenant sale solo del JWT (Alpha no ve los documentos de Beta); Hibernate filtra por `tenant_id`; Postgres aplica RLS con rol `dte_app` sin `BYPASSRLS`.
+- **`Idempotency-Key` obligatorio:** reintento del POS devuelve el mismo DTE; body distinto → `409`. Tras persistir, outbox en la misma transacción y publicación de `DteIssued` a Rabbit tras el commit; un IT consume el mensaje.
+
+OpenAPI con JWT, ArchUnit para la frontera hexagonal, CI con Testcontainers y cobertura forzada en dominio y aplicación.
+
+## Resultado
+
+Se levanta con un comando: login Keycloak, POST con idempotencia, Alpha emite y Beta obtiene 404. Artefacto de portafolio — no software de producción fiscal.

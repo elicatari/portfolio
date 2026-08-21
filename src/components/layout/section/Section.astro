@@ -1,0 +1,67 @@
+---
+import Container from '@/components/layout/container/Container.astro';
+import { cn } from '@/lib/utils/cn/cn';
+
+interface Props {
+  id: string;
+  title?: string;
+  kicker?: string;
+  class?: string;
+  containerClass?: string;
+  /** Si es false, no envuelve el contenido en Container (para full-bleed). */
+  contained?: boolean;
+  /** Ritmo de seccion (Fase 1): banda azul o noche de marca. */
+  tone?: 'default' | 'band' | 'night';
+}
+
+const {
+  id,
+  title,
+  kicker,
+  class: className,
+  containerClass,
+  contained = true,
+  tone = 'default',
+} = Astro.props;
+const hasHeader = Boolean(title || kicker);
+const hasMascot = Astro.slots.has('mascot');
+
+const toneClass =
+  tone === 'band' ? 'atmosphere-band' : tone === 'night' ? 'atmosphere-night' : undefined;
+---
+
+<section id={id} class={cn('scroll-mt-16 py-20 sm:py-28', toneClass, className)}>
+  {
+    contained ? (
+      <Container class={containerClass}>
+        {hasHeader && (
+          <header
+            class={cn(
+              'mb-4',
+              hasMascot &&
+                'flex flex-row items-center justify-between gap-3 md:items-start md:gap-6',
+            )}
+            data-reveal
+          >
+            <div class="min-w-0 max-w-2xl">
+              {kicker && (
+                <p class="text-accent text-fluid-sm mb-1 font-semibold tracking-wide uppercase md:mb-2">
+                  {kicker}
+                </p>
+              )}
+              {title && <h2 class="text-fluid-2xl font-bold">{title}</h2>}
+            </div>
+            {hasMascot && (
+              <div class="mascot-float w-16 shrink-0 md:w-28 lg:w-32">
+                <slot name="mascot" />
+              </div>
+            )}
+          </header>
+        )}
+        <slot />
+      </Container>
+    ) : (
+      <slot />
+    )
+  }
+</section>

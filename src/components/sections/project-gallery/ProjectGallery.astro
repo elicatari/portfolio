@@ -1,0 +1,179 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icon from '@/components/ui/icon/Icon.astro';
+import type { ImageMetadata } from 'astro';
+import type { UIDict } from '@/i18n/ui/ui';
+
+interface Props {
+  images: ImageMetadata[];
+  title: string;
+  t: UIDict;
+}
+
+const { images, title, t } = Astro.props;
+
+const items = await Promise.all(
+  images.map(async (img, index) => {
+    const full = await getImage({ src: img, width: 1600 });
+    return {
+      img,
+      fullSrc: full.src,
+      alt: `${title} — ${index + 1}`,
+    };
+  }),
+);
+
+const hasNav = items.length > 1;
+
+const controlClass =
+  'text-white hover:bg-white/15 focus-visible:outline-white absolute z-10 inline-flex h-10 w-10 items-center justify-center rounded-md bg-black/40 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2';
+---
+
+{
+  items.length > 0 && (
+    <section data-gallery aria-label={t.projects.gallery} class="mt-10">
+      <h2 class="text-fluid-base mb-4 font-semibold">{t.projects.gallery}</h2>
+      <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
+        {items.map((item, index) => (
+          <li class="border-border bg-bg aspect-[4/3] overflow-hidden rounded-md border">
+            <button
+              type="button"
+              data-gallery-open
+              data-index={String(index)}
+              data-src={item.fullSrc}
+              data-alt={item.alt}
+              aria-label={`${t.projects.openGallery}: ${item.alt}`}
+              class="focus-visible:outline-accent group h-full w-full cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              <Image
+                src={item.img}
+                alt=""
+                widths={[240, 400]}
+                sizes="(min-width: 1024px) 12rem, (min-width: 640px) 30vw, 45vw"
+                class="h-full w-full object-cover transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:scale-105"
+              />
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <dialog
+        data-gallery-dialog
+        aria-label={t.projects.gallery}
+        class="m-0 h-full max-h-none w-full max-w-none border-0 bg-black/80 p-0 backdrop:bg-transparent open:flex open:items-center open:justify-center"
+      >
+        <button
+          type="button"
+          data-gallery-close
+          aria-label={t.projects.closeGallery}
+          class:list={[controlClass, 'top-4 right-4']}
+        >
+          <Icon name="lucide:x" size={22} />
+        </button>
+        {
+          hasNav && (
+            <>
+              <button
+                type="button"
+                data-gallery-prev
+                aria-label={t.projects.prevGallery}
+                class:list={[controlClass, 'top-1/2 left-4 -translate-y-1/2']}
+              >
+                <Icon name="lucide:chevron-left" size={24} />
+              </button>
+              <button
+                type="button"
+                data-gallery-next
+                aria-label={t.projects.nextGallery}
+                class:list={[controlClass, 'top-1/2 right-4 -translate-y-1/2']}
+              >
+                <Icon name="lucide:chevron-right" size={24} />
+              </button>
+            </>
+          )
+        }
+        <img
+          data-gallery-full
+          alt=""
+          hidden
+          class="max-h-[90vh] max-w-[min(90vw,80rem)] object-contain p-4"
+        />
+      </dialog>
+    </section>
+  )
+}
+
+<script>
+  function initGallery(root: HTMLElement) {
+    if (root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+
+    const dialog = root.querySelector<HTMLDialogElement>('[data-gallery-dialog]');
+    const full = root.querySelector<HTMLImageElement>('[data-gallery-full]');
+    const closeBtn = root.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const prevBtn = root.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+    const nextBtn = root.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const slides = [...root.querySelectorAll<HTMLButtonElement>('[data-gallery-open]')];
+    if (!dialog || !full || !closeBtn || slides.length === 0) return;
+
+    let lastFocus: HTMLElement | null = null;
+    let index = 0;
+
+    const show = (nextIndex: number) => {
+      index = (nextIndex + slides.length) % slides.length;
+      const slide = slides[index];
+      if (!slide) return;
+      full.src = slide.dataset.src ?? '';
+      full.alt = slide.dataset.alt ?? '';
+      full.hidden = false;
+      lastFocus = slide;
+    };
+
+    const close = () => {
+      if (dialog.open) dialog.close();
+    };
+
+    slides.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        lastFocus = btn;
+        show(Number(btn.dataset.index ?? 0));
+        dialog.showModal();
+        closeBtn.focus();
+      });
+    });
+
+    closeBtn.addEventListener('click', close);
+    prevBtn?.addEventListener('click', () => show(index - 1));
+    nextBtn?.addEventListener('click', () => show(index + 1));
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (!dialog.open || slides.length < 2) return;
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        show(index - 1);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(index + 1);
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      full.removeAttribute('src');
+      full.alt = '';
+      full.hidden = true;
+      lastFocus?.focus();
+    });
+  }
+
+  function initGalleries() {
+    document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(initGallery);
+  }
+
+  initGalleries();
+  document.addEventListener('astro:page-load', initGalleries);
+</script>
