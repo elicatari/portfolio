@@ -17,24 +17,24 @@ publishedAt: 2024-05-03
 lang: 'es'
 ---
 
-## Contexto
+## El problema
 
-**BR Logística** es un WMS en producción para una operación de bodega (productos institucionales). El inventario no se edita a mano: el stock se mueve con documentos, por lote y con vencimiento, para despachar producto que caduca primero.
+**BR Logística** es una empresa chica en lo administrativo y grande en flota. El análisis lo hice con el dueño: no había sistema de inventario, solo Excel. El stock no bajaba al despachar y el producto se vencía en bodega.
 
-## Frontend
+Recomendé control por lote y vencimiento, salida por picking con **FEFO automático** (para no dejarlo al operador), más clientes, devoluciones y ajustes para trazabilidad de entradas y salidas.
 
-SPA en **React + TypeScript** (Cloudflare) con **TanStack Query**. Panel interno de operación, no un e-commerce:
+## Qué construí
 
-- **Inventario:** consulta de stock (solo lectura). Vista global y **por lote**, con SKU, vencimiento y cantidad en cajas + unidades.
-- **Picking:** salidas de inventario en documentos `DRAFT → CONFIRMADO` (también se pueden anular).
-- **Recepción, devoluciones y ajustes:** el resto de movimientos entra por el mismo modelo de documentos.
-- Maestros de productos, proveedores y clientes, más reportes y ventas por SKU.
-- Acceso restringido por rol.
+Un WMS interno en producción, con usuarios y roles: inventario por lote (el stock se consulta, no se edita a mano), recepción, picking, proveedores, clientes, devoluciones y ajustes. El stock solo se mueve con documentos.
 
-## Backend
+## Decisiones técnicas
 
-API en **Java + Spring Boot** (Railway) con **PostgreSQL**. La regla dura es **FEFO**: al confirmar un picking se asigna lote por fecha de vencimiento. El stock solo cambia a través de documentos confirmados, no con un CRUD directo sobre existencias.
+Mismo criterio que Automotriz: **monolito modular** por costo — un deploy, inventario y documentos como dominios separados. SPA **React + TypeScript** (Cloudflare, TanStack Query) y API **Java + Spring Boot** (Railway) sobre **PostgreSQL**, JWT y Flyway.
 
-## Resultado
+## El problema difícil
 
-La bodega consulta stock real por lote y despacha con documentos trazables. El FEFO y el flujo DRAFT → CONFIRMADO evitan que el inventario y lo que sale por picking se desincronicen.
+Al confirmar un picking hay que asignar el lote correcto por FEFO. Las devoluciones vuelven **al mismo lote de origen**, sin romper esa cuenta. El flujo es `DRAFT → CONFIRMADO`: el stock no cambia hasta que el documento se confirma.
+
+## El resultado
+
+Trazabilidad de entradas y salidas, inventario que se mueve solo, menos pérdida por vencimiento, y conteos y preparación de entregas más rápidos.

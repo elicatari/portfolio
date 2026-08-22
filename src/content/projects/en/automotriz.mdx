@@ -19,24 +19,39 @@ publishedAt: 2024-09-12
 lang: 'en'
 ---
 
-## Context
+## The problem
 
-**RealMotors** is an automotive ERP in production: the business needed a public vehicle catalog and an internal panel to run sales, stock and the workshop in one system, without spreadsheets or WhatsApp as the source of truth.
+**Real Motors** was running on **Jumpseller**: a slow storefront, not fully responsive, with poor SEO. I did the analysis myself: I talked to the owners and users, reviewed the platform end to end, and looked at the budget. The real challenge was behind the scenes: inventory with no traceability, sales on paper, reservations with no follow-up, and a workshop that depended on a whiteboard.
 
-## Frontend
+Inventory meant creating a vehicle or parts listing and adding stock, but **sales never decremented it**: there was no traceability. Sales notes were filled in by hand on paper. Work orders were written on a whiteboard with a marker — sometimes not even that. The workshop had no record of the costs put into each vehicle. A reservation was a label on the Jumpseller product, with no real follow-up.
 
-A **React + TypeScript** SPA on Cloudflare Pages. There is a public catalog and an admin panel with operations modules:
+The owners had not asked for a sales-notes module. I proposed it: without a sales document, the rest of the system does not close.
 
-- **Vehicles:** inventory with photo, VIN, color, engine, price and status (available, etc.), search by make, model or VIN, create plus CSV import/export.
-- **Parts and accessories:** stock by SKU, brand and category, with low-stock alerts.
-- **Sales notes, reservations and work orders (OT):** commercial and workshop flow in the same panel.
-- **Quick quote:** a WhatsApp message with the import breakdown.
-- Role-restricted access (login to the management panel).
+## What I built
 
-## Backend
+An operations ERP in production at [realmotors.cl](https://www.realmotors.cl) that **replaced Jumpseller as the business's operating platform**. An internal panel with users and roles, plus a public catalog for customers.
 
-**Java + Spring Boot** API on Railway with **PostgreSQL**. Modular monolith: inventory, sales, reservations and work orders as separate domains, JWT auth and persistence with JPA + Flyway.
+- **Vehicle catalog:** the face of the business, built for performance, mobile, and SEO.
+- **Inventory as two models:** vehicles as unique units (VIN) and parts/accessories as SKUs with quantity, low-stock alerts, search, and CSV import/export.
+- **Sales notes** with installment payments (*abonos*) on the same note, in CLP and USD.
+- **Reservations** with real follow-up, not a label on the listing.
+- **Work orders** with costs and priority, instead of the whiteboard.
+- **Quick WhatsApp quote** with the import breakdown.
 
-## Outcome
+Out of scope on purpose: this is not accounting or SII invoicing; invoices are issued only externally, as required by Zofri regulations.
 
-A production system at [realmotors.cl](https://www.realmotors.cl): a catalog for customers and a panel for the team, with vehicles, parts and sales/workshop documents in one flow.
+## Technical decisions
+
+A **modular monolith** to keep operating cost down: one deploy, with inventory, sales, reservations, and work orders as separate domains, so they can be split later if the budget allows. **Java + Spring Boot** API on Railway over **PostgreSQL**, JWT auth, and persistence with JPA + Flyway.
+
+A **React + TypeScript SPA** on Cloudflare Pages instead of Jumpseller templates: the catalog and the panel load as an app, not as a generic storefront.
+
+## The hard problem
+
+A vehicle is not a SKU. Mixing VIN (one unit = one car) with accessories (quantity that goes up and down) is the usual failure of a generic ERP. Inventory has to treat them differently, and both still have to land on the same sales note.
+
+The commercial knot was payment. Amounts are large: the customer almost never pays in full the same day. A note can accumulate **up to 10 installments, in CLP and USD**, on the same document. The note balance is the source of truth; there is no loose receipt that drifts from the paper copy.
+
+## The outcome
+
+In daily use by 14+ people, over an inventory of 200+ vehicles and 300+ accessories. Stock decrements on sale, with traceability by user and customer. Sales notes, work orders, and workshop costs are digital: search and create are faster, priorities are visible in the system, and the public catalog is the business site — Jumpseller is gone.

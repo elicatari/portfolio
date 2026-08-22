@@ -19,24 +19,39 @@ publishedAt: 2024-09-12
 lang: 'es'
 ---
 
-## Contexto
+## El problema
 
-**RealMotors** es un ERP automotriz en producción: el negocio necesitaba un catálogo público de vehículos y un panel interno para operar ventas, stock y taller en un solo sistema, sin planillas ni WhatsApp como fuente de verdad.
+**Real Motors** operaba sobre **Jumpseller**: una tienda lenta, no del todo responsive y con mal SEO. El análisis fue hecho por mi: hablé con los dueños y usuarios, revisé la plataforma a fondo y el presupuesto. El verdadero desafío estaba detrás: inventario sin trazabilidad, ventas en papel, reservas sin seguimiento y un taller que dependía de una pizarra.
 
-## Frontend
+En inventario se creaba la ficha del vehículo o del repuesto y se cargaba stock, pero **nunca se daba de baja por venta**: no había trazabilidad. Las notas de venta se llenaban a lapicera en papel. Las órdenes de trabajo se anotaban en una pizarra con marcador —a veces ni eso—. En taller no existía registro de los gastos que se le hacían a cada vehículo. Una reserva era pegar una etiqueta al producto en Jumpseller, sin seguimiento.
 
-SPA en **React + TypeScript** (Cloudflare Pages). Hay un catálogo público y un panel de administración con módulos de operación:
+Los dueños no habían pedido un módulo de notas de venta. Lo propuse yo: sin documento de venta, el resto del sistema no cierra.
 
-- **Vehículos:** inventario con foto, VIN, color, motor, precio y estado (disponible, etc.), búsqueda por marca, modelo o VIN, alta e importación/exportación CSV.
-- **Repuestos y accesorios:** stock por SKU, marca y categoría, con alerta de existencias bajas.
-- **Notas de venta, reservas y órdenes de trabajo (OT):** el flujo comercial y de taller en el mismo panel.
-- **Cotización rápida:** mensaje de WhatsApp con desglose de importación.
-- Acceso restringido por rol (login al panel de gestión).
+## Qué construí
 
-## Backend
+Un ERP de operaciones en producción ([realmotors.cl](https://www.realmotors.cl)) que **reemplazó Jumpseller como plataforma operativa del negocio**. Panel interno con usuarios y roles, más un catálogo público para el cliente.
 
-API en **Java + Spring Boot** (Railway) con **PostgreSQL**. Monolito modular: inventario, ventas, reservas y OT como dominios separados, autenticación JWT y persistencia con JPA + Flyway.
+- **Catálogo de vehículos:** la cara del negocio, pensada para rendimiento, móvil y SEO.
+- **Inventario en dos modelos:** vehículos como unidad única (VIN) y repuestos/accesorios como SKU con cantidad, alerta de stock bajo, búsqueda e importación/exportación CSV.
+- **Notas de venta** con abonos dentro de la misma nota, en CLP y USD.
+- **Reservas** con seguimiento real, no una etiqueta en la ficha.
+- **Órdenes de trabajo** con gastos y prioridad, en lugar de la pizarra.
+- **Cotización rápida por WhatsApp** con desglose de importación.
 
-## Resultado
+Fuera de alcance a propósito: no es contabilidad ni facturación SII, las facturas solo se emiten de forma externa por normativa Zofri.
 
-Un sistema en producción en [realmotors.cl](https://www.realmotors.cl): catálogo para el cliente y panel para el equipo, con vehículos, repuestos y documentos de venta/taller en un mismo flujo.
+## Decisiones técnicas
+
+**Monolito modular** para contener el costo de operación: un solo deploy, con inventario, ventas, reservas y OT como dominios separados, por si más adelante hace falta partir. API en **Java + Spring Boot** (Railway) sobre **PostgreSQL**, autenticación JWT y persistencia con JPA + Flyway.
+
+**SPA** en **React + TypeScript** (Cloudflare Pages) en lugar de las plantillas de Jumpseller: el catálogo y el panel cargan como aplicación, no como tienda genérica.
+
+## El problema difícil
+
+Un vehículo no es un SKU. Mezclar VIN (una unidad = un auto) con accesorios (cantidad que sube y baja) es el error típico de un ERP genérico. El inventario tiene que tratarlos distinto y, aun así, ambos tienen que poder entrar en la misma nota de venta.
+
+El nudo comercial fue el cobro. Los montos son altos: el cliente casi nunca paga todo el mismo día. Una nota puede acumular **hasta 10 abonos, en CLP y en USD**, dentro del mismo documento. El saldo de la nota es la fuente de verdad; no hay un recibo suelto que se descuadre con el papel.
+
+## El resultado
+
+En uso diario por +14 personas, sobre un inventario de +200 vehículos y +300 accesorios. El stock se da de baja con la venta y queda trazabilidad por usuario y cliente. Notas, OT y gastos del taller pasaron a digital: buscar y crear es más rápido, las prioridades se ven en el sistema y el catálogo público es el sitio del negocio, ya no Jumpseller.

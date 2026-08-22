@@ -15,33 +15,22 @@ publishedAt: 2026-08-18
 lang: 'es'
 ---
 
-## Contexto
+## El problema
 
-A diferencia de Automotriz y BR Logística — paneles internos de operación — Happy Pet es un **producto de autoservicio**. Cualquier cliente entra, ve el calendario, elige un día, consulta horarios libres y reserva sin pasar por el staff.
+**Happy Pet** llevaba la agenda en papel y coordinaba por WhatsApp. El cliente no sabía si había traslado hasta preguntar y esperar respuesta.
 
-El negocio dejaba de coordinar por WhatsApp: hacía falta mostrar cupos reales y respetar una regla dura de operación, los **traslados (máximo 4 por día)**.
+## Qué construí
 
-## Frontend
+Una agenda pública en tiempo real: el cliente se registra, carga su mascota, elige día y hora y **ve la disponibilidad de traslado** sin pasar por el staff.
 
-SPA en **React + TypeScript**, desplegada en Cloudflare, con el mismo enfoque de UI que el resto de sistemas en producción, pero un flujo distinto: de cara al cliente, pensado para móvil.
+## Decisiones técnicas
 
-- Acceso de clientes y administración (login, registro y recuperación de contraseña).
-- Calendario mensual: días pasados bloqueados, día de preferencia y **disponibilidad de horario**.
-- Reserva con datos personales, mascota, observaciones y si necesita traslado.
-- Gestión de mascotas (hasta 10): peso, raza y notas; el peso define el valor del servicio.
-- Listado de reservas propias y cancelación.
+Empresa chica: **monolito modular**, un deploy. SPA **React + TypeScript** (Cloudflare) y API **Java + Spring Boot** (Railway) sobre **PostgreSQL**.
 
-El repositorio público es el backend; el frontend sigue el mismo patrón React/TS de los otros proyectos y no está enlazado aquí.
+## El problema difícil
 
-## Backend
+Solo **4 traslados por día**. Si dos clientes piden el último a la vez, uno tiene que perder. El cupo —y el horario— se reserva en la base de datos, no con un `if` en la API.
 
-Ahí está lo distinto. La API (**Java + Spring Boot + PostgreSQL**) no se limita a validar en la aplicación: la disponibilidad y el cupo de traslados se **garantizan en la base de datos**, para que dos clientes no se lleven el mismo horario ni el quinto traslado del día.
+## El resultado
 
-- Dominio formal: reglas de negocio trazables en tests.
-- Concurrencia en PostgreSQL (no solo checks en código).
-- CI con pruebas de carrera, mutación y e2e.
-- Docker para un entorno reproducible.
-
-## Resultado
-
-Los clientes agendan solos. El calendario muestra cupos reales y el límite de 4 traslados por día se cumple aunque coincidan varias reservas a la vez.
+Autoservicio: el cliente ve cupos reales y reserva sin ida y vuelta por WhatsApp.

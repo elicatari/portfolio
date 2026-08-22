@@ -15,33 +15,22 @@ publishedAt: 2026-08-18
 lang: 'en'
 ---
 
-## Context
+## The problem
 
-Unlike Automotriz and BR Logística — internal operations panels — Happy Pet is a **self-service product**. Any client can open the calendar, pick a day, see open slots and book without going through staff.
+**Happy Pet** kept the schedule on paper and coordinated over WhatsApp. Clients did not know if a transfer was available until they asked and waited for a reply.
 
-The salon was coordinating over WhatsApp. It needed real availability on screen and a hard operational rule: **transfers (max 4 per day)**.
+## What I built
 
-## Frontend
+A public real-time booking calendar: the client signs up, adds their pet, picks a day and time, and **sees transfer availability** without going through staff.
 
-A **React + TypeScript** SPA on Cloudflare, same UI approach as the other production systems, but a different flow: customer-facing and built for mobile.
+## Technical decisions
 
-- Client and admin access (login, sign-up and password recovery).
-- Monthly calendar: past days locked, preferred day and **time-slot availability**.
-- Booking with personal data, pet details, notes and whether a transfer is needed.
-- Pet management (up to 10): weight, breed and notes; weight sets the service price.
-- Own bookings list and cancellation.
+Small business: a **modular monolith**, one deploy. **React + TypeScript** SPA (Cloudflare) and **Java + Spring Boot** API (Railway) on **PostgreSQL**.
 
-The public repository is the backend; the frontend follows the same React/TS pattern as the other projects and is not linked here.
+## The hard problem
 
-## Backend
+Only **4 transfers per day**. If two clients request the last one at the same time, one has to lose. The cap — and the time slot — is reserved in the database, not with an `if` in the API.
 
-That is the distinctive part. The API (**Java + Spring Boot + PostgreSQL**) does not stop at application-level checks: slot availability and the transfer cap are **enforced in the database**, so two clients cannot take the same slot or a fifth transfer on the same day.
+## The outcome
 
-- Formal domain: business rules traced in tests.
-- Concurrency guaranteed in PostgreSQL (not only in code).
-- CI with race, mutation and e2e tests.
-- Docker for a reproducible environment.
-
-## Outcome
-
-Clients book on their own. The calendar shows real slots, and the 4-transfers-per-day cap holds even when bookings arrive at the same time.
+Self-service: the client sees real availability and books without a WhatsApp back-and-forth.

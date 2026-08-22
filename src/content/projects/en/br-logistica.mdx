@@ -17,24 +17,24 @@ publishedAt: 2024-05-03
 lang: 'en'
 ---
 
-## Context
+## The problem
 
-**BR Logística** is a WMS in production for a warehouse (institutional goods). Inventory is not edited by hand: stock moves through documents, by lot and expiry, so the first product out is the one that expires first.
+**BR Logística** is small on the admin side and large in fleet. I did the analysis with the owner: there was no inventory system, only Excel. Stock did not drop on dispatch, and product expired in the warehouse.
 
-## Frontend
+I recommended lot-and-expiry control, outbound picking with **automatic FEFO** (so it would not depend on the operator), plus customers, returns, and adjustments for inbound/outbound traceability.
 
-A **React + TypeScript** SPA on Cloudflare with **TanStack Query**. An internal operations panel, not an e-commerce site:
+## What I built
 
-- **Inventory:** read-only stock. Global view and **by lot**, with SKU, expiry and quantity in cases + units.
-- **Picking:** inventory exits as `DRAFT → CONFIRMED` documents (they can also be voided).
-- **Receiving, returns and adjustments:** the rest of the movements use the same document model.
-- Product, supplier and customer masters, plus reports and sales by SKU.
-- Role-restricted access.
+An internal WMS in production, with users and roles: lot-level inventory (stock is queried, not edited by hand), receiving, picking, suppliers, customers, returns, and adjustments. Stock only moves through documents.
 
-## Backend
+## Technical decisions
 
-**Java + Spring Boot** API on Railway with **PostgreSQL**. The hard rule is **FEFO**: confirming a pick allocates lots by expiry date. Stock only changes through confirmed documents, not via a direct CRUD on on-hand quantities.
+Same approach as Automotive: a **modular monolith** to keep cost down — one deploy, inventory and documents as separate domains. **React + TypeScript** SPA (Cloudflare, TanStack Query) and **Java + Spring Boot** API (Railway) on **PostgreSQL**, JWT, and Flyway.
 
-## Outcome
+## The hard problem
 
-The warehouse sees real lot-level stock and ships with traceable documents. FEFO and the DRAFT → CONFIRMED flow keep inventory and picking in sync.
+Confirming a pick has to allocate the right lot by FEFO. Returns go back **to the original lot**, without breaking that ledger. The flow is `DRAFT → CONFIRMED`: stock does not change until the document is confirmed.
+
+## The outcome
+
+Inbound/outbound traceability, inventory that moves on its own, less loss to expiry, and faster cycle counts and delivery prep.

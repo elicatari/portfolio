@@ -13,22 +13,22 @@ publishedAt: 2026-08-20
 lang: 'es'
 ---
 
-## Contexto
+## El problema
 
-**DTE Issuer** es un microservicio de emisión de documentos tributarios electrónicos (Boleta 39) para que un POS o ERP — Automotriz, BR Logística, Happy Pet — emita sin conocer el SII. Un proceso, una base, un contrato HTTP.
+Un POS o ERP — Automotriz, BR Logística, Happy Pet — no debería hablar con el SII. Folio numerado, reintento del POS y aislamiento entre negocios son problemas de emisión, no de la pantalla de venta. El **SII queda fuera a propósito**: no hay XML firmado ni homologación. El foco son los invariantes, no la boleta real.
 
-El **SII es un stub**: no hay XML firmado ni homologación. El foco está en los invariantes de emisión, no en facturación fiscal real.
+## Qué construí
 
-## Backend
+Un microservicio de Boleta 39: un proceso, una base, un contrato HTTP. Código completo (no sample). Se levanta con `docker compose up`.
 
-API en **Java 21 + Spring Boot** con arquitectura hexagonal, **Keycloak** (JWT con `tenant_id`) y **PostgreSQL** con RLS. Se levanta con `docker compose up`.
+## Decisiones técnicas
 
-- **Sin folio no hay DTE:** la reserva de folio es una operación del dominio, con bloqueo pesimista por tenant; un IT de concurrencia prueba N POST en paralelo sin huecos ni duplicados.
-- **Multi-tenant en tres capas:** el tenant sale solo del JWT (Alpha no ve los documentos de Beta); Hibernate filtra por `tenant_id`; Postgres aplica RLS con rol `dte_app` sin `BYPASSRLS`.
-- **`Idempotency-Key` obligatorio:** reintento del POS devuelve el mismo DTE; body distinto → `409`. Tras persistir, outbox en la misma transacción y publicación de `DteIssued` a Rabbit tras el commit; un IT consume el mensaje.
+**Arquitectura hexagonal** para que un SII real pueda entrar después sin reescribir el dominio. Multi-tenant en tres capas: el tenant sale solo del JWT (**Keycloak**), Hibernate filtra por `tenant_id` y **PostgreSQL** aplica RLS. Outbox en la misma transacción; `DteIssued` a **RabbitMQ** tras el commit.
 
-OpenAPI con JWT, ArchUnit para la frontera hexagonal, CI con Testcontainers y cobertura forzada en dominio y aplicación.
+## El problema difícil
 
-## Resultado
+Sin folio no hay DTE. La reserva va con bloqueo pesimista por tenant: N POST en paralelo, sin huecos ni duplicados. `Idempotency-Key` obligatorio: el reintento del POS devuelve el mismo documento; body distinto → `409`.
 
-Se levanta con un comando: login Keycloak, POST con idempotencia, Alpha emite y Beta obtiene 404. Artefacto de portafolio — no software de producción fiscal.
+## El resultado
+
+Login Keycloak, POST idempotente, Alpha emite y Beta obtiene 404. Artefacto de portafolio — no software de producción fiscal.
