@@ -37,7 +37,7 @@ Antes de programar operé inventario y ERPs (SAP, SIRA) en planta. Ese dominio e
 - Identidades visuales y material publicitario impreso y digital.
 - Edición de imagen y video adaptada a cada cliente.
 
-### Friex — Jefe de Control de Stock · *Agosto 2018 – Julio 2021*
+### Friex — Jefe de Control de Stock · *Agosto 2018 – Octubre 2022*
 
 - Inventario de productos Nestlé sobre SAP ERP: disponibilidad, mermas, entradas/salidas e inventarios cíclicos.
 

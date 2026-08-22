@@ -37,7 +37,7 @@ Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That
 - Visual identities and advertising material, both print and digital.
 - Image and video editing tailored to each client.
 
-### Friex — Stock Control Manager · *August 2018 – July 2021*
+### Friex — Stock Control Manager · *August 2018 – July October*
 
 - Nestlé product inventory on SAP ERP: availability, shrinkage, goods in/out and cycle counts.
 
