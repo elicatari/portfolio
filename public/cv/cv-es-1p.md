@@ -1,6 +1,6 @@
 # Eliezer Segundo Rojas Catari
 
-Desarrollador Full-Stack (React / TypeScript + Java / Spring Boot) · Venezolano · Visa Definitiva · Iquique, Chile · disponible para presencial o remoto.
+Desarrollador Full-Stack (React / Astro / TypeScript + Java / Spring Boot) · Venezolano · Visa Definitiva · Iquique, Chile · disponible para presencial o remoto.
 
 [linkedin.com/in/elicatari](https://linkedin.com/in/elicatari) · [github.com/elicatari](https://github.com/elicatari) · [Portfolio elicatari.com](https://elicatari.com) · +56 9 38620108 · [dev@elicatari.com](mailto:dev@elicatari.com)
 
