@@ -1,23 +1,22 @@
 import type { SiteConfig } from '@/types';
 
-// TODO: reemplazar la imagen OG por la definitiva.
 export const site: SiteConfig = {
-  name: 'Eliezer Rojas',
+  name: 'Eliezer Rojas Catari',
   nickname: 'elicatari',
   projectName: 'Portfolio',
   url: 'https://elicatari.com',
   email: 'dev@elicatari.com',
   location: {
-    es: 'Chile · Remoto',
-    en: 'Chile · Remote',
+    es: 'Chile · Remoto · Presencial',
+    en: 'Chile · Remote · On-site',
   },
   jobTitle: {
     es: 'Fullstack Developer & Diseñador Grafico',
     en: 'Fullstack Developer & Graphic Designer',
   },
   description: {
-    es: 'Portfolio de un Fullstack Developer y Diseñador Grafico. Desarrollo web de punta a punta con React, Java/Spring Boot y diseño visual.',
-    en: 'Portfolio of a Fullstack Developer and Graphic Designer. End-to-end web development with React, Java/Spring Boot and visual design.',
+    es: 'Fullstack Developer y Diseñador Grafico. Desarrollo web con TypeScript/React, Java/Spring Boot y diseño visual.',
+    en: 'Fullstack Developer and Graphic Designer. Web development with TypeScript/React, Java/Spring Boot and visual design.',
   },
   /** PDF de una pagina servidos desde /public/cv (regenerar con pnpm cv). */
   cv: {
