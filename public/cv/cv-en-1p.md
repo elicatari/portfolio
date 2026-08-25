@@ -27,6 +27,11 @@ Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That
 - Frontend in React, TypeScript, Vite and Tailwind; API in Java 21, Spring Boot, Spring Security (JWT) and PostgreSQL, with Flyway migrations.
 - PDF reports (JasperReports), image uploads (Cloudinary), CSV import/export, role-based access and deployment on Cloudflare Pages and Railway.
 
+### Freelance — Fullstack developer · *2025 – 2026*
+
+- Independent paid work in parallel with other roles; systems delivered to real clients and published when the scope was closed.
+- BR Logística: WMS in production (lot/FEFO, 5+ users). Happy Pet: booking in production (3+ users, 140+ bookings/month).
+
 ### Dicata — IT Lead / Inventory Control · *December 2024 – February 2026*
 
 - Took part in the SIRA ERP rollout and provided user support (hardware and software).

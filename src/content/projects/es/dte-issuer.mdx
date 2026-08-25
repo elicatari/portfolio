@@ -1,15 +1,17 @@
 ---
 title: 'DTE Issuer'
-summary: 'Microservicio de emisión DTE (Chile): folio escaso, multi-tenant con Keycloak, idempotencia y outbox hacia RabbitMQ. SII simulado — no es una boleta real ni homologación.'
+summary: 'Microservicio de emisión DTE: folios, multi-tenant e idempotencia.'
+impact: 'Folios sin colisión · reintentos seguros entre tenants'
 cover: '../../../assets/projects/dte-issuer/dte01.png'
 gallery:
   - '../../../assets/projects/dte-issuer/dte01.png'
-tags: ['Java', 'Spring Boot', 'Keycloak', 'RabbitMQ', 'PostgreSQL', 'Docker']
+tags: ['Java', 'Spring Boot', 'Keycloak', 'RabbitMQ']
+stack: ['Java', 'Spring Boot', 'Hexagonal', 'Keycloak', 'RabbitMQ', 'PostgreSQL', 'Flyway', 'Testcontainers']
 role: 'Backend Developer'
 backendRepoUrl: 'https://github.com/elicatari/dte-issuer-core'
+inProduction: false
 featured: false
 order: 4
-publishedAt: 2026-08-20
 lang: 'es'
 ---
 

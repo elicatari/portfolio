@@ -14,14 +14,13 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const inputClass =
-  'w-full rounded-md border border-border bg-bg px-3 py-2.5 text-fluid-sm text-text transition-colors placeholder:text-muted/70 focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+  'w-full rounded-md border border-border bg-bg px-3 py-2 text-fluid-sm text-text transition-colors placeholder:text-muted/70 focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:py-2.5';
 ---
 
 <Section
   id="contacto"
-  kicker={t.contact.kicker}
   title={t.contact.title}
-  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-4 sm:[&_header]:mb-6 [&_h2]:text-fluid-xl"
 >
   <Mascot
     slot="mascot"
@@ -32,9 +31,10 @@ const inputClass =
     class="drop-shadow-sm"
   />
 
-  <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.25fr] lg:gap-8">
-    <div class="space-y-4" data-reveal>
+  <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_1.25fr] lg:gap-8">
+    <div class="space-y-2 sm:space-y-4" data-reveal>
       <p class="text-muted text-fluid-sm max-w-md leading-relaxed">{t.contact.subtitle}</p>
+      <p class="text-text text-fluid-sm">{site.location[lang]}</p>
       <a
         href={`mailto:${site.email}`}
         class="text-link text-fluid-sm inline-flex items-center gap-2 font-medium hover:underline"
@@ -44,10 +44,10 @@ const inputClass =
       </a>
     </div>
 
-    <form data-contact-form class="space-y-4" data-reveal style="--reveal-delay: 80ms" novalidate>
-      <div class="grid gap-4 sm:grid-cols-2">
+    <form data-contact-form class="space-y-3 sm:space-y-4" data-reveal style="--reveal-delay: 80ms" novalidate>
+      <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
         <div>
-          <label for="name" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.name}</label>
+          <label for="name" class="text-fluid-sm mb-1 block font-medium sm:mb-1.5">{t.contact.name}</label>
           <input
             id="name"
             name="name"
@@ -59,7 +59,7 @@ const inputClass =
           />
         </div>
         <div>
-          <label for="email" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.email}</label>
+          <label for="email" class="text-fluid-sm mb-1 block font-medium sm:mb-1.5">{t.contact.email}</label>
           <input
             id="email"
             name="email"
@@ -73,12 +73,12 @@ const inputClass =
       </div>
 
       <div>
-        <label for="message" class="text-fluid-sm mb-1.5 block font-medium">{t.contact.message}</label>
+        <label for="message" class="text-fluid-sm mb-1 block font-medium sm:mb-1.5">{t.contact.message}</label>
         <textarea
           id="message"
           name="message"
           required
-          rows="4"
+          rows="3"
           placeholder={t.contact.messagePlaceholder}
           class={inputClass}></textarea>
       </div>

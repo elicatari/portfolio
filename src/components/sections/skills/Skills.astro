@@ -15,7 +15,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<Section id="skills" kicker={t.skills.kicker} title={t.skills.title} class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_h2]:text-fluid-xl">
+<Section id="skills" title={t.skills.title} class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_h2]:text-fluid-xl">
   <Mascot
     slot="mascot"
     pose="code"

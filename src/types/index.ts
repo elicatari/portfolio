@@ -31,9 +31,18 @@ export interface Social {
 /** Item de navegacion de la navbar. Ancla dentro de la home. */
 export interface NavItem {
   /** clave del texto en el diccionario nav.* */
-  key: 'home' | 'about' | 'skills' | 'projects' | 'contact';
+  key: 'home' | 'about' | 'skills' | 'projects' | 'jobs' | 'contact';
   /** ancla (ej. "#skills"). */
   anchor: string;
+}
+
+/** Puesto laboral (seccion Experiencia). */
+export interface Job {
+  company: string;
+  role: Record<Lang, string>;
+  period: Record<Lang, string>;
+  /** Viñetas; una sola para roles compactos (p. ej. diseño). */
+  bullets: Record<Lang, string>[];
 }
 
 /** Curso dentro de un track del roadmap de formacion. */
@@ -114,6 +123,7 @@ export type MascotSection =
   | 'hero'
   | 'about'
   | 'timeline'
+  | 'jobs'
   | 'skills'
   | 'projects'
   | 'contact'

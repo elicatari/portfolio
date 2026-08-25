@@ -27,6 +27,11 @@ Antes de programar operé inventario y ERPs (SAP, SIRA) en planta. Ese dominio e
 - Frontend en React, TypeScript, Vite y Tailwind; API en Java 21, Spring Boot, Spring Security (JWT) y PostgreSQL, con migraciones Flyway.
 - Informes PDF (JasperReports), carga de imágenes (Cloudinary), importación/exportación CSV, acceso por rol y despliegue en Cloudflare Pages y Railway.
 
+### Freelance — Desarrollador fullstack · *2025 – 2026*
+
+- Encargos independientes en paralelo a otros roles; sistemas entregados a clientes reales y publicados al cerrar el alcance.
+- BR Logística: WMS en producción (lote/FEFO, +5 usuarios). Happy Pet: agenda en producción (+3 usuarios, +140 reservas/mes).
+
 ### Dicata — Encargado IT / Control de inventario · *Diciembre 2024 – Febrero 2026*
 
 - Participé en la implementación del ERP SIRA y di soporte a usuarios (hardware y software).

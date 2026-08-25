@@ -4,14 +4,15 @@
     "about": "About",
     "skills": "Skills",
     "projects": "Projects",
+    "jobs": "Experience",
     "contact": "Contact"
   },
   "hero": {
-    "greeting": "Hello World!, I'm",
-    "roles": "Fullstack Developer Focused on Frontend / Graphic Designer",
+    "greeting": "Hello!, I'm",
+    "roles": "Fullstack Developer",
     "summary": [
-      "I'm a developer who builds interactive web experiences with TypeScript and React, along with robust APIs developed with Java and Spring Boot. I have hands-on experience merging software development with my graphic design training, which lets me integrate composition, visual identity and user experience into the creation process, aiming for a balance between aesthetics, usability and technical quality. My profile is complemented by data persistence with Hibernate and JPA, databases such as PostgreSQL and MongoDB, plus essential tools like Docker and GitHub.",
-      "I hold two professional degrees: Higher University Technician (TSU) in Computer Science and Graphic Designer. I keep training myself and acquiring new knowledge on my own."
+      "I build software for real businesses. Inventory, sales, workshop and scheduling solutions end to end, from the operational problem through to production deployment.",
+      "I used to run support, inventory and ERPs; today I use that judgment to build the software the business actually needs."
     ],
     "ctaCv": "Download CV",
     "ctaContact": "Let's talk",
@@ -19,22 +20,22 @@
   },
   "about": {
     "title": "About me",
-    "kicker": "Who I am",
     "loveTitle": "What I love",
     "bioTitle": "Bio",
-    "path": "My path didn't start among lines of code, but exploring visual communication as a graphic designer. Over time, curiosity about how everything worked on the inside led me into computing and software development. Today I don't see design and code as separate fields, but as two sides of the same solution.",
-    "mascot": "And that mascot? If you're wondering about the little panda that lives in this portfolio, his name is Pandiux. He was born from a play on words between pandas, user experience (UI/UX), and the free software GNU/Linux. He's the official mascot of my digital space.",
-    "elibits": "One more curiosity... Did you find the EliBits easter egg? It's the identity I use for independent technical consulting, specialized support, and software development."
+    "path": "I started in graphic design. Curiosity about how everything worked on the inside led me into computing. Today I use both for the same thing: understanding how the business runs and building the software that supports it.",
+    "mascot": "The mascot is Pandiux: panda + UI/UX + GNU/Linux.",
+    "elibits": "Elibits is an easter egg: the alias I use on some projects."
+  },
+  "jobs": {
+    "title": "Experience"
   },
   "timeline": {
     "title": "Roadmap",
-    "kicker": "Journey",
     "frontend": "Frontend",
     "backend": "Backend"
   },
   "skills": {
     "title": "Skills",
-    "kicker": "Tools I use",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -45,9 +46,8 @@
   },
   "projects": {
     "title": "Projects",
-    "kicker": "Selected work",
     "featured": "Featured",
-    "inProduction": "In production · Cloudflare + Railway",
+    "inProduction": "In production",
     "viewProject": "View project",
     "back": "Back to projects",
     "role": "Role",
@@ -63,15 +63,14 @@
   },
   "contact": {
     "title": "Contact",
-    "kicker": "Let's talk",
-    "subtitle": "Tell me about your project or idea and I'll get back to you shortly.",
+    "subtitle": "Open to frontend, backend or fullstack roles. If you have a one-off project, you can write too.",
     "emailLink": "Open your preferred email app",
     "name": "Name",
     "namePlaceholder": "Your name",
     "email": "Email",
     "emailPlaceholder": "you@email.com",
     "message": "Message",
-    "messagePlaceholder": "Tell me how I can help...",
+    "messagePlaceholder": "Role, team, or an operations problem...",
     "send": "Send message",
     "sending": "Sending...",
     "success": "Message sent. Thanks, I'll reply soon.",

@@ -58,6 +58,14 @@ More detail on each project at [elicatari.com](https://elicatari.com).
 - Frontend in React, TypeScript, Vite and Tailwind; API in Java 21, Spring Boot, Spring Security (JWT) and PostgreSQL, with Flyway migrations.
 - PDF reports (JasperReports), image uploads (Cloudinary), CSV import/export, role-based access and deployment on Cloudflare Pages and Railway.
 
+### Freelance — Fullstack developer
+
+*2025 – 2026*
+
+- Independent paid work, in parallel with other roles: systems delivered to real clients and published when the scope was closed.
+- BR Logística: WMS in production with lot-level inventory and automatic FEFO; 5+ users, replaced spreadsheets and paper.
+- Happy Pet: self-service booking in production; 3+ users and 140+ bookings a month, replaced WhatsApp and paper.
+
 ### Dicata — IT Lead / Inventory Control
 
 *December 2024 – February 2026*

@@ -22,15 +22,16 @@ const t = useTranslations(lang);
 const {
   title,
   summary,
+  impact,
   cover,
   gallery,
   tags,
+  stack,
   role,
-  frontendRepoUrl,
-  backendRepoUrl,
   liveUrl,
 } = project.data;
 const { Content } = await render(project);
+const tech = stack?.length ? stack : tags;
 
 const thumbs: ImageMetadata[] = [];
 const seen = new Set<string>();
@@ -40,7 +41,6 @@ for (const img of [cover, ...(gallery ?? [])]) {
   thumbs.push(img);
 }
 
-const hasLinks = Boolean(liveUrl || frontendRepoUrl || backendRepoUrl);
 ---
 
 <article class="py-12 sm:py-16">
@@ -55,9 +55,14 @@ const hasLinks = Boolean(liveUrl || frontendRepoUrl || backendRepoUrl);
 
     <header class="max-w-3xl">
       <h1 class="text-fluid-xl font-bold tracking-tight">{title}</h1>
+      {
+        impact && (
+          <p class="text-text text-fluid-base mt-3 font-medium leading-snug">{impact}</p>
+        )
+      }
       <p class="text-muted text-fluid-base mt-3 leading-relaxed">{summary}</p>
 
-      <div class="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+      <div class="mt-5 space-y-4">
         {
           role && (
             <div>
@@ -66,50 +71,27 @@ const hasLinks = Boolean(liveUrl || frontendRepoUrl || backendRepoUrl);
             </div>
           )
         }
-        <ul class="flex flex-wrap gap-1.5">
-          {
-            tags.map((tag) => (
-              <li>
-                <Tag>{tag}</Tag>
-              </li>
-            ))
-          }
-        </ul>
+        <div>
+          <span class="text-muted text-fluid-sm">{t.projects.tech}</span>
+          <ul class="mt-1.5 flex flex-wrap gap-1.5">
+            {
+              tech.map((item) => (
+                <li>
+                  <Tag>{item}</Tag>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
 
       {
-        hasLinks && (
-          <div class="mt-6 flex flex-wrap gap-3">
-            {liveUrl && (
-              <Button href={liveUrl} target="_blank" rel="noopener noreferrer" size="sm">
-                <Icon name="lucide:external-link" size={16} />
-                {t.projects.liveDemo}
-              </Button>
-            )}
-            {frontendRepoUrl && (
-              <Button
-                href={frontendRepoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outline"
-                size="sm"
-              >
-                <Icon name="simple-icons:github" size={16} />
-                {t.projects.codeSampleFrontend}
-              </Button>
-            )}
-            {backendRepoUrl && (
-              <Button
-                href={backendRepoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outline"
-                size="sm"
-              >
-                <Icon name="simple-icons:github" size={16} />
-                {t.projects.codeSampleBackend}
-              </Button>
-            )}
+        liveUrl && (
+          <div class="mt-6">
+            <Button href={liveUrl} target="_blank" rel="noopener noreferrer" size="sm">
+              <Icon name="lucide:external-link" size={16} />
+              {t.projects.liveDemo}
+            </Button>
           </div>
         )
       }

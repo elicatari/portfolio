@@ -1,0 +1,63 @@
+---
+import Section from '@/components/layout/section/Section.astro';
+import Mascot from '@/components/media/mascot/Mascot.astro';
+import { jobs } from '@/data/jobs/jobs';
+import { useTranslations } from '@/i18n/utils/utils';
+import type { Lang } from '@/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section
+  id="experiencia"
+  title={t.jobs.title}
+  class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
+>
+  <Mascot
+    slot="mascot"
+    pose="wrench"
+    decorative
+    widths={[160, 240]}
+    sizes="(min-width: 768px) 8rem, 4rem"
+    class="drop-shadow-sm"
+  />
+  <ol class="border-border relative border-s">
+    {
+      jobs.map((job, index) => (
+        <li
+          class="ms-6 mb-8 last:mb-0"
+          data-reveal
+          style={`--reveal-delay: ${index * 70}ms`}
+        >
+          <p class="text-accent text-fluid-sm font-medium">{job.period[lang]}</p>
+          <h3 class="text-fluid-base mt-0.5 font-semibold">{job.company}</h3>
+          <p class="text-muted text-fluid-sm mt-0.5">{job.role[lang]}</p>
+          <ul class="mt-2 space-y-2">
+            {job.bullets.map((bullet) => {
+              const text = bullet[lang];
+              const sep = text.indexOf(':');
+              const hasLabel = sep > 0 && sep < 48;
+              return (
+                <li class="text-text text-fluid-sm leading-relaxed">
+                  {hasLabel ? (
+                    <>
+                      <span class="font-semibold">{text.slice(0, sep + 1)}</span>
+                      {text.slice(sep + 1)}
+                    </>
+                  ) : (
+                    text
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

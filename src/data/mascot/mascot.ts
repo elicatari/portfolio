@@ -45,7 +45,7 @@ export const mascotPoses: Record<MascotPoseId, MascotPose> = {
     src: wrench,
     sourceFile: 'iconos panduix 03.png',
     priority: 'brand',
-    sections: ['brand'],
+    sections: ['jobs', 'brand'],
   },
   search: {
     id: 'search',

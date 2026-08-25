@@ -4,14 +4,15 @@
     "about": "Sobre mi",
     "skills": "Skills",
     "projects": "Proyectos",
+    "jobs": "Experiencia",
     "contact": "Contacto"
   },
   "hero": {
-    "greeting": "¡Hola Mundo!, soy",
-    "roles": "Desarrollador Fullstack Enfocado en Frontend / Diseñador Gráfico",
+    "greeting": "¡Hola!, soy",
+    "roles": "Desarrollador Fullstack",
     "summary": [
-      "Soy un desarrollador que construye experiencias web interactivas con TypeScript y React, junto con APIs robustas desarrolladas con Java y Spring Boot. Cuento con experiencia práctica fusionando el desarrollo de software con mi formación en diseño gráfico, lo que me permite integrar criterios de composición, identidad visual y experiencia de usuario en el proceso de creación, buscando un equilibrio entre estética, usabilidad y calidad técnica. Mi perfil se complementa con el manejo de persistencia de datos mediante Hibernate y JPA, bases de datos como PostgreSQL y MongoDB, además de herramientas esenciales como Docker y GitHub.",
-      "Poseo dos formaciones profesionales: soy Técnico Superior Universitario (TSU) en Informática y Diseñador Gráfico. Continúo capacitándome y adquiriendo nuevos conocimientos de manera autodidacta."
+      "Construyo software para negocios reales. Soluciones de inventario, ventas, taller y agenda llevadas de punta a punta, desde el problema operativo hasta el despliegue final.",
+      "Antes operé soporte, inventario y ERPs; hoy uso ese criterio para construir el software que el negocio necesita."
     ],
     "ctaCv": "Descargar CV",
     "ctaContact": "Hablemos",
@@ -19,22 +20,22 @@
   },
   "about": {
     "title": "Sobre mi",
-    "kicker": "Quien soy",
     "loveTitle": "Lo que me gusta",
     "bioTitle": "Bio",
-    "path": "Mi camino no empezó directamente entre líneas de código, sino explorando la comunicación visual como diseñador gráfico. Con el tiempo, mi curiosidad por saber cómo funcionaba todo por dentro me llevó al mundo de la informática y el desarrollo de software. Hoy no veo el diseño y el código como áreas separadas, sino como dos caras de una misma solución.",
-    "mascot": "¿Y esa mascota? Si te preguntas por el pequeño panda que habita en este portfolio, su nombre es Pandiux. Nació de un juego de palabras entre los pandas, la experiencia de usuario (UI/UX) y el software libre GNU/Linux. Es la mascota oficial de mi espacio digital.",
-    "elibits": "Una curiosidad más... ¿Descubriste el easter egg de EliBits? Es la identidad con la que presto servicios independientes de consultoría técnica, soporte especializado y desarrollo de software."
+    "path": "Empecé en diseño gráfico. La curiosidad por cómo funcionaba todo por dentro me llevó a informática. Hoy uso las dos cosas para lo mismo: entender el proceso del negocio y construir la herramienta que lo sostiene.",
+    "mascot": "La mascota es Pandiux: panda + UI/UX + GNU/Linux.",
+    "elibits": "Elibits es un easter egg: el alias con el que firmo algunos trabajos."
+  },
+  "jobs": {
+    "title": "Experiencia"
   },
   "timeline": {
     "title": "Roadmap",
-    "kicker": "Formación autodidacta",
     "frontend": "Frontend",
     "backend": "Backend"
   },
   "skills": {
     "title": "Skills",
-    "kicker": "Herramientas que uso",
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -45,13 +46,12 @@
   },
   "projects": {
     "title": "Proyectos",
-    "kicker": "Trabajo seleccionado",
     "featured": "Destacado",
-    "inProduction": "En producción · Cloudflare + Railway",
+    "inProduction": "En producción",
     "viewProject": "Ver proyecto",
     "back": "Volver a proyectos",
     "role": "Rol",
-    "tech": "Tecnologias",
+    "tech": "Tecnologías",
     "liveDemo": "Ver en vivo",
     "codeSampleFrontend": "Sample frontend",
     "codeSampleBackend": "Sample backend",
@@ -63,15 +63,14 @@
   },
   "contact": {
     "title": "Contacto",
-    "kicker": "Hablemos",
-    "subtitle": "Cuéntame sobre tu proyecto o idea y te respondo a la brevedad.",
+    "subtitle": "Abierto a roles de desarrollo frontend, backend o fullstack. Si tienes un proyecto puntual, también puedes escribirme.",
     "emailLink": "Abre tu app de correo preferida",
     "name": "Nombre",
     "namePlaceholder": "Tu nombre",
     "email": "Email",
     "emailPlaceholder": "tu@email.com",
     "message": "Mensaje",
-    "messagePlaceholder": "Cuéntame en qué puedo ayudarte...",
+    "messagePlaceholder": "Rol, equipo o un problema de operación...",
     "send": "Enviar mensaje",
     "sending": "Enviando...",
     "success": "Mensaje enviado. Gracias, te respondo pronto.",

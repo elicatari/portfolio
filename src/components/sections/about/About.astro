@@ -17,7 +17,6 @@ const loves = about.loves[lang];
 
 <Section
   id="sobre-mi"
-  kicker={t.about.kicker}
   title={t.about.title}
   class="pt-0 pb-8 sm:pt-0 sm:pb-10 lg:pt-1 lg:pb-12 [&_header]:mb-6 [&_h2]:text-fluid-xl"
 >
@@ -36,36 +35,37 @@ const loves = about.loves[lang];
           class="drop-shadow-sm"
         />
       </div>
-      <p class="text-text text-fluid-sm leading-relaxed">
-        {
-          t.about.mascot.split('Pandiux').map((part, index) =>
-            index === 0 ? (
-              part
-            ) : (
-              <>
-                <span class="text-link font-semibold">Pandiux</span>
-                {part}
-              </>
-            ),
-          )
-        }
-      </p>
+      <div class="min-w-0 space-y-3">
+        <p class="text-text text-fluid-sm leading-relaxed">
+          {
+            t.about.mascot.split('Pandiux').map((part, index) =>
+              index === 0 ? (
+                part
+              ) : (
+                <>
+                  <span class="text-link font-semibold">Pandiux</span>
+                  {part}
+                </>
+              ),
+            )
+          }
+        </p>
+        <p class="text-text text-fluid-sm leading-relaxed">
+          {
+            t.about.elibits.split('EliBits').map((part, index) =>
+              index === 0 ? (
+                part
+              ) : (
+                <>
+                  <span class="text-link font-semibold">EliBits</span>
+                  {part}
+                </>
+              ),
+            )
+          }
+        </p>
+      </div>
     </div>
-
-    <p class="text-text text-fluid-sm mt-4 leading-relaxed" data-reveal style="--reveal-delay: 90ms">
-      {
-        t.about.elibits.split('EliBits').map((part, index) =>
-          index === 0 ? (
-            part
-          ) : (
-            <>
-              <span class="text-link font-semibold">EliBits</span>
-              {part}
-            </>
-          ),
-        )
-      }
-    </p>
 
     <div class="mt-8" data-reveal style="--reveal-delay: 120ms">
       <h3 class="text-fluid-sm mb-3 font-semibold">{t.about.bioTitle}</h3>

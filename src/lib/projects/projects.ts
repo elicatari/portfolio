@@ -13,11 +13,8 @@ export function getProjectUrl(lang: Lang, slug: string): string {
   return lang === 'es' ? `/proyectos/${slug}` : `/en/projects/${slug}`;
 }
 
-/** Proyectos de un idioma, ordenados por `order` y luego por fecha (desc). */
+/** Proyectos de un idioma, ordenados por `order`. */
 export async function getProjectsByLang(lang: Lang): Promise<Project[]> {
   const all = await getCollection('projects', ({ data }) => data.lang === lang);
-  return all.sort((a, b) => {
-    if (a.data.order !== b.data.order) return a.data.order - b.data.order;
-    return b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
-  });
+  return all.sort((a, b) => a.data.order - b.data.order);
 }

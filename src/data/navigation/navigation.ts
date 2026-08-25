@@ -4,6 +4,7 @@ import type { NavItem } from '@/types';
 export const navItems: NavItem[] = [
   { key: 'home', anchor: '#inicio' },
   { key: 'projects', anchor: '#proyectos' },
+  { key: 'jobs', anchor: '#experiencia' },
   { key: 'about', anchor: '#sobre-mi' },
   { key: 'skills', anchor: '#skills' },
   { key: 'contact', anchor: '#contacto' },

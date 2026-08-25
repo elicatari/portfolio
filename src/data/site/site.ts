@@ -11,12 +11,12 @@ export const site: SiteConfig = {
     en: 'Chile · Remote · On-site',
   },
   jobTitle: {
-    es: 'Fullstack Developer & Diseñador Grafico',
-    en: 'Fullstack Developer & Graphic Designer',
+    es: 'Fullstack Developer',
+    en: 'Fullstack Developer',
   },
   description: {
-    es: 'Fullstack Developer y Diseñador Grafico. Desarrollo web con TypeScript/React, Java/Spring Boot y diseño visual.',
-    en: 'Fullstack Developer and Graphic Designer. Web development with TypeScript/React, Java/Spring Boot and visual design.',
+    es: 'Fullstack Developer. Desarrollo web con TypeScript/React, Java/Spring Boot y diseño visual.',
+    en: 'Fullstack Developer. Web development with TypeScript/React, Java/Spring Boot and visual design.',
   },
   /** PDF de una pagina servidos desde /public/cv (regenerar con pnpm cv). */
   cv: {

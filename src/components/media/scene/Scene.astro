@@ -35,7 +35,10 @@ const layers = [
 <div
   role="img"
   aria-label={alt}
-  class={cn('scene relative aspect-[1100/1188] w-full select-none', className)}
+  class={cn(
+    'scene relative aspect-[1100/1188] w-full select-none lg:h-full lg:w-auto',
+    className,
+  )}
 >
   {
     layers.map((layer, index) => (
@@ -45,7 +48,7 @@ const layers = [
         aria-hidden="true"
         loading={index === layers.length - 1 ? 'eager' : 'lazy'}
         widths={[440, 640, 900]}
-        sizes="(min-width: 1024px) 26rem, 22rem"
+        sizes="(min-width: 1024px) 28vw, 22rem"
         class={cn(
           'scene-layer pointer-events-none absolute inset-0 h-full w-full object-contain',
           layer.motion,
