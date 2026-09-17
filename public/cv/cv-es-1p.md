@@ -1,14 +1,14 @@
 # Eliezer Segundo Rojas Catari
 
-Desarrollador Full-Stack (React / Astro / TypeScript + Java / Spring Boot) · Venezolano · Visa Definitiva · Iquique, Chile · disponible para presencial o remoto.
+Desarrollador Full-Stack junior/mid (React / TypeScript + Java / Spring Boot) · sistemas en producción · Venezolano · Visa Definitiva · Iquique, Chile · disponible para presencial o remoto.
 
 [linkedin.com/in/elicatari](https://linkedin.com/in/elicatari) · [github.com/elicatari](https://github.com/elicatari) · [Portfolio elicatari.com](https://elicatari.com) · +56 9 38620108 · [dev@elicatari.com](mailto:dev@elicatari.com)
 
 ## Perfil
 
-Desarrollador fullstack con tres sistemas en producción que sostienen la operación diaria de negocios reales: un ERP vertical de operaciones automotriz (inventario, ventas, taller), un WMS con inventario por lote/FEFO y una agenda de autoservicio. Trabajo el frontend en React y TypeScript y el backend en Java y Spring Boot, construyendo APIs REST sobre PostgreSQL con autenticación JWT.
+Desarrollador fullstack con ownership de tres sistemas en producción que sostienen la operación diaria de negocios reales: un ERP vertical de operaciones automotriz (inventario, ventas, taller), un WMS con inventario por lote/FEFO y una agenda de autoservicio. Trabajo el frontend en React y TypeScript y el backend en Java y Spring Boot, construyendo APIs REST sobre PostgreSQL con autenticación JWT.
 
-Antes de programar operé inventario y ERPs (SAP, SIRA) en planta. Ese dominio es el que uso para diseñar las herramientas que el negocio realmente necesita, no pantallas genéricas. TSU en Informática y Diseñador Gráfico. Busco un rol de desarrollo web frontend, backend o fullstack.
+Antes de programar operé inventario y ERPs (SAP, SIRA) en planta. Ese dominio es el que uso para diseñar las herramientas que el negocio realmente necesita, no pantallas genéricas. TSU en Informática y Diseñador Gráfico. Busco un rol junior/mid de desarrollo frontend, backend o fullstack con impacto en producto real (no solo tickets de feature).
 
 ## Proyectos
 

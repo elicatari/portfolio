@@ -20,6 +20,20 @@ const CVS = [
     src: 'public/cv/cv-en-1p.md',
     out: 'public/cv/Eliezer_Rojas_Developer_CV_EN.pdf',
   },
+  {
+    id: 'es-soporte',
+    lang: 'es',
+    compact: true,
+    src: 'public/cv/cv-es-soporte-1p.md',
+    out: 'public/cv/Eliezer_Rojas_Soporte_CV.pdf',
+  },
+  {
+    id: 'es-informatico',
+    lang: 'es',
+    compact: true,
+    src: 'public/cv/cv-es-informatico.md',
+    out: 'public/cv/Eliezer_Rojas_Informatico_CV.pdf',
+  },
 ];
 
 const TMP_DIR = '.cache/cv';

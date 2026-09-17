@@ -1,7 +1,19 @@
+# CV en public/cv: solo variantes Developer en el repo (Soporte/Informatico son locales)
+public/cv/*
+!public/cv/cv-es.md
+!public/cv/cv-en.md
+!public/cv/cv-es-1p.md
+!public/cv/cv-en-1p.md
+!public/cv/Eliezer_Rojas_Developer_CV.pdf
+!public/cv/Eliezer_Rojas_Developer_CV_EN.pdf
+
 # Documentacion interna (no se sube al repo)
 docs/
 docs/plan-mejoras-portfolio.md
 README.local.md
+
+# Material de estudio local (entrevistas). Nunca versionar.
+study/
 
 # Dependencias
 node_modules/

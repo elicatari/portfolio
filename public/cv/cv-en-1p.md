@@ -1,18 +1,18 @@
 # Eliezer Segundo Rojas Catari
 
-Full-Stack Developer (React / Astro / TypeScript + Java / Spring Boot) · Venezuelan · Chilean permanent residency · Iquique, Chile · open to on-site or remote.
+Junior/Mid Full-Stack Developer (React / TypeScript + Java / Spring Boot) · production systems · Venezuelan · Visa Definitiva · Iquique · on-site or remote.
 
 [linkedin.com/in/elicatari](https://linkedin.com/in/elicatari) · [github.com/elicatari](https://github.com/elicatari) · [Portfolio elicatari.com](https://elicatari.com) · +56 9 38620108 · [dev@elicatari.com](mailto:dev@elicatari.com)
 
 ## Profile
 
-Fullstack developer with three systems in production running the day-to-day operations of real businesses: a vertical ERP for automotive operations (inventory, sales, workshop), a WMS with lot/FEFO inventory and a self-service booking system. I build the frontend with React and TypeScript and the backend with Java and Spring Boot, shipping REST APIs on PostgreSQL with JWT authentication.
+Fullstack developer with ownership of three systems in production running the day-to-day operations of real businesses: a vertical ERP for automotive operations (inventory, sales, workshop), a WMS with lot/FEFO inventory and a self-service booking system. I build the frontend with React and TypeScript and the backend with Java and Spring Boot, shipping REST APIs on PostgreSQL with JWT authentication.
 
-Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That domain knowledge is what I use to design the tools a business actually needs instead of generic screens. Associate degree in Computer Science and Graphic Design. Looking for a web development role: frontend, backend or fullstack.
+Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That domain knowledge is what I use to design the tools a business actually needs instead of generic screens. TSU in Computer Science and Graphic Design. Looking for a junior/mid frontend, backend or fullstack role with real product impact.
 
 ## Projects
 
-*The production systems have private codebases; the linked repositories are architecture samples. For full detail visit my portfolio at [elicatari.com](https://elicatari.com).*
+*Production code is private; linked repos are architecture samples. More at [elicatari.com](https://elicatari.com).*
 
 - **Real Motors** — *In production · Fullstack* - Automotive ERP (VIN/SKU inventory, sales notes, reservations, workshop). 14+ users, 200+ vehicles, 300+ accessories; replaced paper-based work. *Architecture sample: [backend](https://github.com/elicatari/automotive-erp-core-api) · [frontend](https://github.com/elicatari/automotive-erp-web)*
 - **BR Logística** — *In production · Fullstack* - WMS with DRAFT → CONFIRMED documents and lot/FEFO inventory. Replaced paper control with no history or expiry tracking. *Architecture sample: [backend](https://github.com/elicatari/warehouse-wms-core-api) · [frontend](https://github.com/elicatari/warehouse-wms-web)*
@@ -29,7 +29,7 @@ Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That
 
 ### Freelance — Fullstack developer · *2025 – 2026*
 
-- Independent paid work in parallel with other roles; systems delivered to real clients and published when the scope was closed.
+- Paid freelance in parallel with other roles.
 - BR Logística: WMS in production (lot/FEFO, 5+ users). Happy Pet: booking in production (3+ users, 140+ bookings/month).
 
 ### Dicata — IT Lead / Inventory Control · *December 2024 – February 2026*
@@ -39,10 +39,9 @@ Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That
 
 ### SECAM — Graphic Designer · *November 2022 – November 2024 · September 2017 – July 2018*
 
-- Visual identities and advertising material, both print and digital.
-- Image and video editing tailored to each client.
+- Visual identities and advertising material, print and digital; image and video editing.
 
-### Friex — Stock Control Manager · *August 2018 – July October*
+### Friex — Stock Control Manager · *August 2018 – October 2022*
 
 - Nestlé product inventory on SAP ERP: availability, shrinkage, goods in/out and cycle counts.
 
