@@ -1,6 +1,6 @@
 # Eliezer Segundo Rojas Catari
 
-Junior/Mid Full-Stack Developer (React / TypeScript + Java / Spring Boot) · production systems · Venezuelan · Chilean permanent residency · Iquique, Chile · open to on-site or remote.
+Full-Stack Developer (React / TypeScript + Java / Spring Boot) · production systems · Venezuelan · Chilean permanent residency · Iquique, Chile · open to on-site or remote.
 
 [linkedin.com/in/elicatari](https://linkedin.com/in/elicatari) · [github.com/elicatari](https://github.com/elicatari) · [elicatari.com](https://elicatari.com) · +56 9 38620108 · [dev@elicatari.com](mailto:dev@elicatari.com)
 
@@ -8,7 +8,7 @@ Junior/Mid Full-Stack Developer (React / TypeScript + Java / Spring Boot) · pro
 
 Fullstack developer with ownership of three systems in production running the day-to-day operations of real businesses: a vertical ERP for automotive operations (inventory, sales, workshop), a WMS with lot/FEFO inventory and a self-service booking system. I build the frontend with React and TypeScript and the backend with Java and Spring Boot, shipping REST APIs on PostgreSQL with JWT authentication.
 
-Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That domain knowledge is what I use to design the tools a business actually needs instead of generic screens. Associate degree in Computer Science and Graphic Design. Looking for a junior/mid frontend, backend or fullstack role with real product impact (not just feature tickets).
+Before writing code I ran inventory and ERPs (SAP, SIRA) on the shop floor. That domain knowledge is what I use to design the tools a business actually needs instead of generic screens. Associate degree in Computer Science and Graphic Design. Looking for a frontend, backend or fullstack role with real product impact (not just feature tickets).
 
 ## Projects
 
